@@ -1,0 +1,881 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/ontologies/2022/1/apso/core#"
+     xml:base="http://www.semanticweb.org/ontologies/2022/1/apso/core"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#hasAuthor -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#hasAuthor">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Application"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#ApplicationAuthor"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#hasPart -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#hasPart">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#partOf"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#hasPartDirectly -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#hasPartDirectly">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#hasPart"/>
+        <rdfs:domain rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#hasPreference -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#hasPreference">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Policy"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Preference"/>
+        <owl:propertyChainAxiom rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#hasPart"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#hasPreference"/>
+        </owl:propertyChainAxiom>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#hasProtectionLevel -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#hasProtectionLevel">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#ProtectionLevel"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#onDescriptiveContext -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#onDescriptiveContext">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Preference"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#DescriptiveContext"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#onPreferenceAction -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#onPreferenceAction">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Preference"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#PreferenceAction"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#onPreferenceObject -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#onPreferenceObject">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Preference"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#PreferenceObject"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#onTargetContext -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#onTargetContext">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Preference"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#TargetContext"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#partOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#partOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#priority -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#priority">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Preference"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#Application -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Application">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#TargetContext"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#partOf"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:oneOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Universal_Target"/>
+                        </owl:oneOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#hasPartDirectly"/>
+                <owl:hasSelf rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:hasSelf>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#ApplicationCategory"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#ApplicationAuthor -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#ApplicationAuthor">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#ApplicationCategory -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#ApplicationCategory">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#TargetContext"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#ApplicationTargetPreference -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#ApplicationTargetPreference">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#onTargetContext"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Application"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Preference"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#BackgroundPermission -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#BackgroundPermission">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#ConditionalContext -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#ConditionalContext">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#DescriptiveContext"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#PreferenceObject"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#TargetContext"/>
+                </owl:unionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#CustomCategory -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#CustomCategory">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#ApplicationCategory"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#DangerousPermission -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#DangerousPermission">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#hasProtectionLevel"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:oneOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Dangerous"/>
+                        </owl:oneOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#partOf"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:oneOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Dangerous_Permissions"/>
+                        </owl:oneOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#DescriptiveContext -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#DescriptiveContext">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#ConditionalContext"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#partOf"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:oneOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Universal_Description"/>
+                        </owl:oneOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#hasPart"/>
+                <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#DescriptiveContext"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#hasPartDirectly"/>
+                <owl:hasSelf rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:hasSelf>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#PreferenceObject"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#GroupTargetPreference -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#GroupTargetPreference">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#onTargetContext"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#ApplicationCategory"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Preference"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#Location -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Location">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#DescriptiveContext"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#SocialEnvironment"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#NormalPermission -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#NormalPermission">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#hasProtectionLevel"/>
+                        <owl:someValuesFrom>
+                            <owl:Class>
+                                <owl:oneOf rdf:parseType="Collection">
+                                    <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Normal"/>
+                                </owl:oneOf>
+                            </owl:Class>
+                        </owl:someValuesFrom>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#hasProtectionLevel"/>
+                        <owl:someValuesFrom>
+                            <owl:Class>
+                                <owl:oneOf rdf:parseType="Collection">
+                                    <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Signature"/>
+                                </owl:oneOf>
+                            </owl:Class>
+                        </owl:someValuesFrom>
+                    </owl:Restriction>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#partOf"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:oneOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Normal_Permissions"/>
+                        </owl:oneOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#DangerousPermission"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#NormalPermission"/>
+                </owl:unionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#PreferenceObject"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#partOf"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:oneOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Universal_Object"/>
+                        </owl:oneOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#hasProtectionLevel"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass>
+                    <owl:Class>
+                        <owl:oneOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Dangerous"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Normal"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Signature"/>
+                        </owl:oneOf>
+                    </owl:Class>
+                </owl:onClass>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#hasPartDirectly"/>
+                <owl:hasSelf rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:hasSelf>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#PermissionGroup"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#PermissionGroup -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#PermissionGroup">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#PreferenceObject"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#PermissionGroupPreference -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#PermissionGroupPreference">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#onPreferenceObject"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#PermissionGroup"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Preference"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#PlayCategory -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#PlayCategory">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#ApplicationCategory"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#Policy -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Policy">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#hasPart"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:oneOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Pol_Android"/>
+                        </owl:oneOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#Preference -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Preference">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#onPreferenceAction"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#PreferenceAction"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#onPreferenceObject"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#PreferenceObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#onTargetContext"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#TargetContext"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#PreferenceAction -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#PreferenceAction">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:oneOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Act_Not_Share"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Act_Prompt_Group"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Act_Prompt_Permission"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Act_Share"/>
+                </owl:oneOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#PreferenceObject -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#PreferenceObject">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#ConditionalContext"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#hasPart"/>
+                <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#ProtectionLevel -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#ProtectionLevel">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#ProtectionLevelPreference -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#ProtectionLevelPreference">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#onPreferenceObject"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:oneOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Dangerous_Permissions"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Normal_Permissions"/>
+                        </owl:oneOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Preference"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#SocialEnvironment -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#SocialEnvironment">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#DescriptiveContext"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#TargetContext -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#TargetContext">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#ConditionalContext"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#hasPart"/>
+                <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Application"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#DescriptiveContext"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#PreferenceObject"/>
+                </owl:unionOf>
+            </owl:Class>
+        </owl:disjointWith>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#Time -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Time">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#DescriptiveContext"/>
+        <owl:disjointWith>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Location"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#SocialEnvironment"/>
+                </owl:unionOf>
+            </owl:Class>
+        </owl:disjointWith>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#UniversalObjectPreference -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#UniversalObjectPreference">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#onPreferenceObject"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:oneOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Universal_Object"/>
+                        </owl:oneOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Preference"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#UniversalTargetPreference -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#UniversalTargetPreference">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#onTargetContext"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:oneOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Universal_Target"/>
+                        </owl:oneOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Preference"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#Act_Not_Share -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Act_Not_Share"/>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#Act_Prompt_Group -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Act_Prompt_Group"/>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#Act_Prompt_Permission -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Act_Prompt_Permission"/>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#Act_Share -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Act_Share"/>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#Android_1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Android_1">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Preference"/>
+        <onDescriptiveContext rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Universal_Description"/>
+        <onPreferenceAction rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Act_Prompt_Group"/>
+        <onPreferenceObject rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Dangerous_Permissions"/>
+        <onTargetContext rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Universal_Target"/>
+        <priority rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</priority>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#Android_2 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Android_2">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Preference"/>
+        <onDescriptiveContext rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Universal_Description"/>
+        <onPreferenceAction rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Act_Share"/>
+        <onPreferenceObject rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Normal_Permissions"/>
+        <onTargetContext rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Universal_Target"/>
+        <priority rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</priority>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#Background_Permissions -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Background_Permissions">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#PreferenceObject"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#Dangerous_Permissions -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Dangerous_Permissions">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#PreferenceObject"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#Normal_Permissions -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Normal_Permissions">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#PreferenceObject"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#Pol_Android -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Pol_Android">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Policy"/>
+        <hasPreference rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Android_1"/>
+        <hasPreference rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Android_2"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Dangerous -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Dangerous">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#ProtectionLevel"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Normal -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Normal">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#ProtectionLevel"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Signature -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Signature">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#ProtectionLevel"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#Universal_Description -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Universal_Description">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#DescriptiveContext"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#Universal_Object -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Universal_Object">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#PreferenceObject"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/core#Universal_Target -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Universal_Target">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#TargetContext"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
+        <owl:distinctMembers rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Act_Not_Share"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Act_Prompt_Group"/>
+        </owl:distinctMembers>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
+        <owl:distinctMembers rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Act_Not_Share"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Act_Prompt_Permission"/>
+        </owl:distinctMembers>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
+        <owl:distinctMembers rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Act_Not_Share"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Act_Share"/>
+        </owl:distinctMembers>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
+        <owl:distinctMembers rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Act_Prompt_Group"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Act_Prompt_Permission"/>
+        </owl:distinctMembers>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
+        <owl:distinctMembers rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Act_Prompt_Group"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Act_Share"/>
+        </owl:distinctMembers>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
+        <owl:distinctMembers rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Act_Prompt_Permission"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Act_Share"/>
+        </owl:distinctMembers>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
+        <owl:distinctMembers rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Dangerous"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Normal"/>
+        </owl:distinctMembers>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
+        <owl:distinctMembers rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Dangerous"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Signature"/>
+        </owl:distinctMembers>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
+        <owl:distinctMembers rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Normal"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Signature"/>
+        </owl:distinctMembers>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
