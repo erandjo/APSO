@@ -1,8 +1,104 @@
-@prefix :     <http://www.semanticweb.org/ontologies/2022/1/apso/core#> .
-@prefix owl:  <http://www.w3.org/2002/07/owl#> .
-@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix :       <http://www.semanticweb.org/ontologies/2022/1/apso/core#> .
+@prefix device: <http://www.semanticweb.org/ontologies/2022/1/apso/device#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix perm:   <http://www.semanticweb.org/ontologies/2022/1/apso/perm#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+
+perm:Access_Coarse_Location
+        rdf:type             :ConditionalContext , :DangerousPermission , owl:NamedIndividual , :PreferenceObject , :Permission ;
+        :hasPart             perm:Access_Coarse_Location ;
+        :hasPartDirectly     perm:Access_Coarse_Location ;
+        :hasProtectionLevel  :Prot_Dangerous ;
+        :partOf              perm:Access_Coarse_Location , perm:Group_Location , :Dangerous_Permissions , :Universal_Object .
+
+:ConditionalContext  rdf:type  owl:Class ;
+        rdfs:subClassOf      owl:Thing ;
+        owl:equivalentClass  [ rdf:type     owl:Class ;
+                               owl:unionOf  ( :DescriptiveContext :PreferenceObject :TargetContext )
+                             ] .
+
+:DangerousPermission  rdf:type  owl:Class ;
+        rdfs:subClassOf   :Permission ;
+        rdfs:subClassOf   [ rdf:type            owl:Restriction ;
+                            owl:onProperty      :hasProtectionLevel ;
+                            owl:someValuesFrom  [ rdf:type   owl:Class ;
+                                                  owl:oneOf  ( :Prot_Dangerous )
+                                                ]
+                          ] ;
+        rdfs:subClassOf   [ rdf:type            owl:Restriction ;
+                            owl:onProperty      :partOf ;
+                            owl:someValuesFrom  [ rdf:type   owl:Class ;
+                                                  owl:oneOf  ( :Dangerous_Permissions )
+                                                ]
+                          ] ;
+        owl:disjointWith  :DescriptiveContext , :PermissionGroup , :PlayCategory , :TargetContext , :NormalPermission , :Time , :SocialEnvironment , :Location .
+
+:PreferenceObject  rdf:type  owl:Class ;
+        rdfs:subClassOf   :ConditionalContext ;
+        rdfs:subClassOf   [ rdf:type           owl:Restriction ;
+                            owl:allValuesFrom  :Permission ;
+                            owl:onProperty     :hasPart
+                          ] ;
+        owl:disjointWith  :TargetContext , :Time , :SocialEnvironment .
+
+:Permission  rdf:type        owl:Class ;
+        rdfs:subClassOf      :PreferenceObject ;
+        rdfs:subClassOf      [ rdf:type                     owl:Restriction ;
+                               owl:maxQualifiedCardinality  1 ;
+                               owl:onClass                  [ rdf:type   owl:Class ;
+                                                              owl:oneOf  ( :Prot_Dangerous :Prot_Normal :Prot_Signature )
+                                                            ] ;
+                               owl:onProperty               :hasProtectionLevel
+                             ] ;
+        rdfs:subClassOf      [ rdf:type        owl:Restriction ;
+                               owl:hasSelf     true ;
+                               owl:onProperty  :hasPartDirectly
+                             ] ;
+        rdfs:subClassOf      [ rdf:type            owl:Restriction ;
+                               owl:onProperty      :partOf ;
+                               owl:someValuesFrom  [ rdf:type   owl:Class ;
+                                                     owl:oneOf  ( :Universal_Object )
+                                                   ]
+                             ] ;
+        owl:disjointWith     :PermissionGroup , :PlayCategory , :TargetContext , :Time , :SocialEnvironment ;
+        owl:equivalentClass  [ rdf:type     owl:Class ;
+                               owl:unionOf  ( :DangerousPermission :NormalPermission )
+                             ] .
+
+:hasPart  rdf:type          owl:ObjectProperty , owl:TransitiveProperty ;
+        rdfs:domain         owl:Thing ;
+        rdfs:range          owl:Thing ;
+        rdfs:subPropertyOf  owl:topObjectProperty ;
+        owl:inverseOf       :partOf .
+
+:hasPartDirectly  rdf:type  owl:ObjectProperty ;
+        rdfs:domain         owl:Thing ;
+        rdfs:range          owl:Thing ;
+        rdfs:subPropertyOf  :hasPart .
+
+:hasProtectionLevel  rdf:type  owl:ObjectProperty ;
+        rdfs:domain         :Permission ;
+        rdfs:range          :ProtectionLevel ;
+        rdfs:subPropertyOf  owl:topObjectProperty .
+
+:Prot_Dangerous  rdf:type  owl:NamedIndividual , :ProtectionLevel .
+
+:partOf  rdf:type           owl:ObjectProperty , owl:TransitiveProperty ;
+        rdfs:domain         owl:Thing ;
+        rdfs:range          owl:Thing ;
+        rdfs:subPropertyOf  owl:topObjectProperty .
+
+perm:Group_Location  rdf:type  :ConditionalContext , owl:NamedIndividual , :PreferenceObject , :PermissionGroup ;
+        :hasPart  perm:Access_Coarse_Location , perm:Access_Background_Location , perm:Access_Fine_Location .
+
+:Dangerous_Permissions
+        rdf:type  :ConditionalContext , owl:NamedIndividual , :PreferenceObject ;
+        :hasPart  perm:Access_Coarse_Location , perm:Write_Call_Log , perm:Read_External_Storage , perm:Access_Background_Location , perm:Read_Calendar , perm:Process_Outgoing_Calls , perm:Write_External_Storage , perm:Write_Calendar , perm:Read_Contacts , perm:Write_Contacts , perm:Accept_Handover , perm:Record_Audio , perm:Access_Media_Location , perm:Camera , perm:Receive_Mms , perm:Use_Sip , perm:Access_Fine_Location , perm:Add_Voicemail , perm:Activity_Recognition , perm:Call_Phone , perm:Read_Phone_Numbers , perm:Read_Phone_State , perm:Answer_Phone_Calls , perm:Receive_Sms , perm:Send_Sms , perm:Receive_Wap_Push , perm:Body_Sensors , perm:Read_Sms , perm:Read_Call_Log .
+
+:Universal_Object  rdf:type  :ConditionalContext , owl:NamedIndividual , :PreferenceObject ;
+        :hasPart  perm:Access_Coarse_Location , perm:Write_Call_Log , perm:Read_Basic_Phone_State , perm:Read_External_Storage , perm:Access_Background_Location , perm:Read_Calendar , perm:Process_Outgoing_Calls , perm:Call_Companion_App , perm:Write_External_Storage , perm:Write_Calendar , perm:Read_Contacts , perm:Write_Contacts , perm:Accept_Handover , perm:Manage_Media , perm:Use_Biometric , perm:Use_Fingerprint , perm:Record_Audio , perm:Access_Media_Location , perm:Camera , perm:Receive_Mms , perm:Use_Sip , perm:Access_Fine_Location , perm:Add_Voicemail , perm:Activity_Recognition , perm:Manage_External_Storage , perm:Call_Phone , perm:Read_Phone_Numbers , perm:Manage_Own_Calls , perm:Read_Phone_State , perm:Answer_Phone_Calls , perm:Receive_Sms , perm:Send_Sms , perm:Receive_Wap_Push , perm:Body_Sensors , perm:Read_Sms , perm:Read_Call_Log , perm:High_Sampling_Rate_Sensors .
 
 :DescriptiveContext  rdf:type  owl:Class ;
         rdfs:subClassOf   :ConditionalContext ;
@@ -20,17 +116,224 @@
                             owl:hasSelf     true ;
                             owl:onProperty  :hasPartDirectly
                           ] ;
-        owl:disjointWith  :PreferenceObject .
+        owl:disjointWith  :PreferenceObject , :Permission , :PermissionGroup , :PlayCategory , :TargetContext , :NormalPermission .
 
-:ConditionalContext  rdf:type  owl:Class ;
-        rdfs:subClassOf      owl:Thing ;
-        owl:equivalentClass  [ rdf:type     owl:Class ;
-                               owl:unionOf  ( :DescriptiveContext :PreferenceObject :TargetContext )
-                             ] .
+:Universal_Description
+        rdf:type          :ConditionalContext , owl:NamedIndividual , :DescriptiveContext ;
+        :hasPart          :Universal_Description , device:DC_At_Work ;
+        :hasPartDirectly  :Universal_Description ;
+        :partOf           :Universal_Description .
+
+:PermissionGroup  rdf:type  owl:Class ;
+        rdfs:subClassOf   :PreferenceObject ;
+        owl:disjointWith  :PlayCategory , :TargetContext , :Time , :SocialEnvironment .
+
+:PlayCategory  rdf:type   owl:Class ;
+        rdfs:subClassOf   :ApplicationCategory ;
+        owl:disjointWith  :PreferenceObject , :Time , :SocialEnvironment .
+
+:TargetContext  rdf:type  owl:Class ;
+        rdfs:subClassOf   :ConditionalContext ;
+        rdfs:subClassOf   [ rdf:type           owl:Restriction ;
+                            owl:allValuesFrom  :Application ;
+                            owl:onProperty     :hasPart
+                          ] ;
+        owl:disjointWith  :Time ;
+        owl:disjointWith  [ rdf:type     owl:Class ;
+                            owl:unionOf  ( :DescriptiveContext :PreferenceObject )
+                          ] .
+
+:NormalPermission  rdf:type  owl:Class ;
+        rdfs:subClassOf   :Permission ;
+        rdfs:subClassOf   [ rdf:type            owl:Restriction ;
+                            owl:onProperty      :partOf ;
+                            owl:someValuesFrom  [ rdf:type   owl:Class ;
+                                                  owl:oneOf  ( :Normal_Permissions )
+                                                ]
+                          ] ;
+        rdfs:subClassOf   [ rdf:type     owl:Class ;
+                            owl:unionOf  ( [ rdf:type            owl:Restriction ;
+                                             owl:onProperty      :hasProtectionLevel ;
+                                             owl:someValuesFrom  [ rdf:type   owl:Class ;
+                                                                   owl:oneOf  ( :Prot_Normal )
+                                                                 ]
+                                           ]
+                                           [ rdf:type            owl:Restriction ;
+                                             owl:onProperty      :hasProtectionLevel ;
+                                             owl:someValuesFrom  [ rdf:type   owl:Class ;
+                                                                   owl:oneOf  ( :Prot_Signature )
+                                                                 ]
+                                           ]
+                                         )
+                          ] ;
+        owl:disjointWith  :PermissionGroup , :PlayCategory , :TargetContext , :Time , :SocialEnvironment .
 
 [ rdf:type             owl:AllDifferent ;
-  owl:distinctMembers  ( :Act_Prompt_Group :Act_Share )
+  owl:distinctMembers  ( :Act_Not_Share :Act_Share )
 ] .
+
+:Act_Not_Share  rdf:type  owl:NamedIndividual , :PreferenceAction .
+
+:Act_Share  rdf:type  owl:NamedIndividual , :PreferenceAction .
+
+perm:Write_Call_Log  rdf:type  :ConditionalContext , :DangerousPermission , owl:NamedIndividual , :PreferenceObject , :Permission ;
+        :hasPart             perm:Write_Call_Log ;
+        :hasPartDirectly     perm:Write_Call_Log ;
+        :hasProtectionLevel  :Prot_Dangerous ;
+        :partOf              :Dangerous_Permissions , :Universal_Object , perm:Write_Call_Log , perm:Group_Call_Log .
+
+perm:Group_Call_Log  rdf:type  :ConditionalContext , owl:NamedIndividual , :PreferenceObject , :PermissionGroup ;
+        :hasPart  perm:Write_Call_Log , perm:Process_Outgoing_Calls , perm:Read_Call_Log .
+
+device:CC_Mary_Approved_Apps
+        rdf:type  :ConditionalContext , owl:NamedIndividual , :TargetContext , :ApplicationCategory , :CustomCategory ;
+        :hasPart  device:App_NRKTV .
+
+:ApplicationCategory  rdf:type  owl:Class ;
+        rdfs:subClassOf   :TargetContext ;
+        owl:disjointWith  :DangerousPermission , :PreferenceObject , :Permission , :DescriptiveContext , :PermissionGroup , :NormalPermission , :Time , :SocialEnvironment , :Location , :BackgroundPermission .
+
+:CustomCategory  rdf:type  owl:Class ;
+        rdfs:subClassOf   :ApplicationCategory ;
+        owl:disjointWith  :DangerousPermission , :PreferenceObject , :Permission , :DescriptiveContext , :PermissionGroup , :NormalPermission , :Time , :SocialEnvironment , :Location .
+
+device:App_NRKTV  rdf:type  :ConditionalContext , owl:NamedIndividual , :TargetContext , :Application ;
+        :hasAuthor        device:Author_NRK ;
+        :hasPart          device:App_NRKTV ;
+        :hasPartDirectly  device:App_NRKTV ;
+        :partOf           device:CC_Mary_Approved_Apps , device:App_NRKTV , :Universal_Target , device:PC_Entertainment .
+
+device:DC_At_Work  rdf:type  :ConditionalContext , owl:NamedIndividual , :DescriptiveContext ;
+        :hasPart          device:DC_At_Work ;
+        :hasPartDirectly  device:DC_At_Work ;
+        :partOf           :Universal_Description , device:DC_At_Work .
+
+perm:Read_Basic_Phone_State
+        rdf:type             :ConditionalContext , owl:NamedIndividual , :PreferenceObject , :Permission , :NormalPermission ;
+        :hasPart             perm:Read_Basic_Phone_State ;
+        :hasPartDirectly     perm:Read_Basic_Phone_State ;
+        :hasProtectionLevel  :Prot_Normal ;
+        :partOf              :Universal_Object , perm:Read_Basic_Phone_State , perm:Group_Phone , :Normal_Permissions .
+
+:Prot_Normal  rdf:type  owl:NamedIndividual , :ProtectionLevel .
+
+perm:Group_Phone  rdf:type  :ConditionalContext , owl:NamedIndividual , :PreferenceObject , :PermissionGroup ;
+        :hasPart  perm:Read_Basic_Phone_State , perm:Call_Companion_App , perm:Accept_Handover , perm:Use_Sip , perm:Add_Voicemail , perm:Call_Phone , perm:Read_Phone_Numbers , perm:Manage_Own_Calls , perm:Read_Phone_State , perm:Answer_Phone_Calls .
+
+:Normal_Permissions  rdf:type  :ConditionalContext , owl:NamedIndividual , :PreferenceObject ;
+        :hasPart  perm:Read_Basic_Phone_State , perm:Call_Companion_App , perm:Manage_Media , perm:Use_Biometric , perm:Use_Fingerprint , perm:Manage_External_Storage , perm:Manage_Own_Calls , perm:High_Sampling_Rate_Sensors .
+
+perm:Read_External_Storage
+        rdf:type             :ConditionalContext , :DangerousPermission , owl:NamedIndividual , :PreferenceObject , :Permission ;
+        :hasPart             perm:Read_External_Storage ;
+        :hasPartDirectly     perm:Read_External_Storage ;
+        :hasProtectionLevel  :Prot_Dangerous ;
+        :partOf              :Dangerous_Permissions , :Universal_Object , perm:Read_External_Storage , perm:Group_Storage .
+
+perm:Group_Storage  rdf:type  :ConditionalContext , owl:NamedIndividual , :PreferenceObject , :PermissionGroup ;
+        :hasPart  perm:Read_External_Storage , perm:Write_External_Storage , perm:Manage_Media , perm:Access_Media_Location , perm:Manage_External_Storage .
+
+device:Child_1  rdf:type       owl:NamedIndividual , :Preference , :UniversalObjectPreference , :GroupTargetPreference ;
+        :onDescriptiveContext  :Universal_Description ;
+        :onPreferenceAction    :Act_Share ;
+        :onPreferenceObject    :Universal_Object ;
+        :onTargetContext       device:CC_Mary_Approved_Apps ;
+        :priority              1 .
+
+:Preference  rdf:type    owl:Class ;
+        rdfs:subClassOf  owl:Thing ;
+        rdfs:subClassOf  [ rdf:type                  owl:Restriction ;
+                           owl:onClass               :TargetContext ;
+                           owl:onProperty            :onTargetContext ;
+                           owl:qualifiedCardinality  1
+                         ] ;
+        rdfs:subClassOf  [ rdf:type                  owl:Restriction ;
+                           owl:onClass               :PreferenceObject ;
+                           owl:onProperty            :onPreferenceObject ;
+                           owl:qualifiedCardinality  1
+                         ] ;
+        rdfs:subClassOf  [ rdf:type                  owl:Restriction ;
+                           owl:onDataRange           xsd:nonNegativeInteger ;
+                           owl:onProperty            :priority ;
+                           owl:qualifiedCardinality  1
+                         ] ;
+        rdfs:subClassOf  [ rdf:type                  owl:Restriction ;
+                           owl:onClass               :PreferenceAction ;
+                           owl:onProperty            :onPreferenceAction ;
+                           owl:qualifiedCardinality  1
+                         ] .
+
+:UniversalObjectPreference
+        rdf:type             owl:Class ;
+        rdfs:subClassOf      :Preference ;
+        owl:equivalentClass  [ rdf:type            owl:Restriction ;
+                               owl:onProperty      :onPreferenceObject ;
+                               owl:someValuesFrom  [ rdf:type   owl:Class ;
+                                                     owl:oneOf  ( :Universal_Object )
+                                                   ]
+                             ] .
+
+:GroupTargetPreference
+        rdf:type             owl:Class ;
+        rdfs:subClassOf      :Preference ;
+        owl:equivalentClass  [ rdf:type            owl:Restriction ;
+                               owl:onProperty      :onTargetContext ;
+                               owl:someValuesFrom  :ApplicationCategory
+                             ] .
+
+:onDescriptiveContext
+        rdf:type            owl:ObjectProperty ;
+        rdfs:domain         :Preference ;
+        rdfs:range          :DescriptiveContext ;
+        rdfs:subPropertyOf  owl:topObjectProperty .
+
+:onPreferenceAction  rdf:type  owl:ObjectProperty ;
+        rdfs:domain         :Preference ;
+        rdfs:range          :PreferenceAction ;
+        rdfs:subPropertyOf  owl:topObjectProperty .
+
+:onPreferenceObject  rdf:type  owl:ObjectProperty ;
+        rdfs:domain         :Preference ;
+        rdfs:range          :PreferenceObject ;
+        rdfs:subPropertyOf  owl:topObjectProperty .
+
+:onTargetContext  rdf:type  owl:ObjectProperty ;
+        rdfs:domain         :Preference ;
+        rdfs:range          :TargetContext ;
+        rdfs:subPropertyOf  owl:topObjectProperty .
+
+:priority  rdf:type  owl:FunctionalProperty , owl:DatatypeProperty ;
+        rdfs:domain  :Preference ;
+        rdfs:range   xsd:nonNegativeInteger .
+
+device:Henry_3  rdf:type       owl:NamedIndividual , :Preference , :ApplicationTargetPreference ;
+        :onDescriptiveContext  :Universal_Description ;
+        :onPreferenceAction    :Act_Share ;
+        :onPreferenceObject    perm:Access_Background_Location ;
+        :onTargetContext       device:App_Hjelp113 ;
+        :priority              3 .
+
+:ApplicationTargetPreference
+        rdf:type             owl:Class ;
+        rdfs:subClassOf      :Preference ;
+        owl:disjointWith     :GroupTargetPreference ;
+        owl:equivalentClass  [ rdf:type            owl:Restriction ;
+                               owl:onProperty      :onTargetContext ;
+                               owl:someValuesFrom  :Application
+                             ] .
+
+perm:Access_Background_Location
+        rdf:type             :ConditionalContext , :DangerousPermission , owl:NamedIndividual , :PreferenceObject , :Permission ;
+        :hasPart             perm:Access_Background_Location ;
+        :hasPartDirectly     perm:Access_Background_Location ;
+        :hasProtectionLevel  :Prot_Dangerous ;
+        :partOf              perm:Group_Location , :Dangerous_Permissions , :Universal_Object , perm:Access_Background_Location , :Background_Permissions .
+
+device:App_Hjelp113  rdf:type  :ConditionalContext , owl:NamedIndividual , :TargetContext , :Application ;
+        :hasAuthor        device:Author_Stiftelsen_Norsk_Luftambulanse ;
+        :hasPart          device:App_Hjelp113 ;
+        :hasPartDirectly  device:App_Hjelp113 ;
+        :partOf           device:App_Hjelp113 , :Universal_Target , device:PC_Medical .
 
 :PermissionGroupPreference
         rdf:type             owl:Class ;
@@ -50,20 +353,19 @@
                                                    ]
                              ] .
 
-:DangerousPermission  rdf:type  owl:Class ;
-        rdfs:subClassOf  :Permission ;
-        rdfs:subClassOf  [ rdf:type            owl:Restriction ;
-                           owl:onProperty      :partOf ;
-                           owl:someValuesFrom  [ rdf:type   owl:Class ;
-                                                 owl:oneOf  ( :Dangerous_Permissions )
-                                               ]
-                         ] ;
-        rdfs:subClassOf  [ rdf:type            owl:Restriction ;
-                           owl:onProperty      :hasProtectionLevel ;
-                           owl:someValuesFrom  [ rdf:type   owl:Class ;
-                                                 owl:oneOf  ( :Prot_Dangerous )
-                                               ]
-                         ] .
+:Time   rdf:type          owl:Class ;
+        rdfs:subClassOf   :DescriptiveContext ;
+        owl:disjointWith  [ rdf:type     owl:Class ;
+                            owl:unionOf  ( :Location :SocialEnvironment )
+                          ] .
+
+:SocialEnvironment  rdf:type  owl:Class ;
+        rdfs:subClassOf   :DescriptiveContext ;
+        owl:disjointWith  :TargetContext , :Time .
+
+:Location  rdf:type       owl:Class ;
+        rdfs:subClassOf   :DescriptiveContext ;
+        owl:disjointWith  :PreferenceObject , :Permission , :PermissionGroup , :PlayCategory , :TargetContext , :NormalPermission , :Time , :SocialEnvironment .
 
 :UniversalTargetPreference
         rdf:type             owl:Class ;
@@ -75,11 +377,38 @@
                                                    ]
                              ] .
 
-:onDescriptiveContext
-        rdf:type            owl:ObjectProperty ;
-        rdfs:domain         :Preference ;
-        rdfs:range          :DescriptiveContext ;
-        rdfs:subPropertyOf  owl:topObjectProperty .
+:Universal_Target  rdf:type  :ConditionalContext , owl:NamedIndividual , :TargetContext ;
+        :hasPart  device:App_NRKTV , device:App_Hjelp113 , device:App_Zoom , device:App_Authenticator .
+
+perm:Read_Calendar  rdf:type  :ConditionalContext , :DangerousPermission , owl:NamedIndividual , :PreferenceObject , :Permission ;
+        :hasPart             perm:Read_Calendar ;
+        :hasPartDirectly     perm:Read_Calendar ;
+        :hasProtectionLevel  :Prot_Dangerous ;
+        :partOf              :Dangerous_Permissions , :Universal_Object , perm:Read_Calendar , perm:Group_Calendar .
+
+perm:Group_Calendar  rdf:type  :ConditionalContext , owl:NamedIndividual , :PreferenceObject , :PermissionGroup ;
+        :hasPart  perm:Read_Calendar , perm:Write_Calendar .
+
+[ rdf:type             owl:AllDifferent ;
+  owl:distinctMembers  ( :Prot_Dangerous :Prot_Signature )
+] .
+
+:Prot_Signature  rdf:type  owl:NamedIndividual , :ProtectionLevel .
+
+device:Henry_1  rdf:type       owl:NamedIndividual , :Preference , :UniversalObjectPreference , :GroupTargetPreference ;
+        :onDescriptiveContext  :Universal_Description ;
+        :onPreferenceAction    :Act_Share ;
+        :onPreferenceObject    :Universal_Object ;
+        :onTargetContext       device:CC_Microsoft_Apps ;
+        :priority              1 .
+
+device:CC_Microsoft_Apps
+        rdf:type  :ConditionalContext , owl:NamedIndividual , :TargetContext , :ApplicationCategory , :CustomCategory ;
+        :hasPart  device:App_Authenticator .
+
+owl:topObjectProperty
+        rdf:type       owl:SymmetricProperty , owl:TransitiveProperty ;
+        owl:inverseOf  owl:topObjectProperty .
 
 :PreferenceAction  rdf:type  owl:Class ;
         rdfs:subClassOf      owl:Thing ;
@@ -87,109 +416,14 @@
                                owl:oneOf  ( :Act_Not_Share :Act_Prompt_Group :Act_Prompt_Permission :Act_Share )
                              ] .
 
-:ApplicationAuthor  rdf:type  owl:Class ;
-        rdfs:subClassOf  owl:Thing .
-
-:ApplicationTargetPreference
-        rdf:type             owl:Class ;
-        rdfs:subClassOf      :Preference ;
-        owl:equivalentClass  [ rdf:type            owl:Restriction ;
-                               owl:onProperty      :onTargetContext ;
-                               owl:someValuesFrom  :Application
-                             ] .
-
-[ rdf:type             owl:AllDifferent ;
-  owl:distinctMembers  ( :Prot_Normal :Prot_Signature )
-] .
-
-[ rdf:type             owl:AllDifferent ;
-  owl:distinctMembers  ( :Act_Not_Share :Act_Prompt_Permission )
-] .
-
-:PermissionGroup  rdf:type  owl:Class ;
-        rdfs:subClassOf  :PreferenceObject .
-
-[ rdf:type             owl:AllDifferent ;
-  owl:distinctMembers  ( :Prot_Dangerous :Prot_Signature )
-] .
-
-:hasProtectionLevel  rdf:type  owl:ObjectProperty ;
-        rdfs:domain         :Permission ;
-        rdfs:range          :ProtectionLevel ;
-        rdfs:subPropertyOf  owl:topObjectProperty .
-
-<http://www.semanticweb.org/ontologies/2022/1/apso/>
-        rdf:type  owl:Ontology .
-
-:Preference  rdf:type    owl:Class ;
-        rdfs:subClassOf  owl:Thing ;
-        rdfs:subClassOf  [ rdf:type                  owl:Restriction ;
-                           owl:onClass               :TargetContext ;
-                           owl:onProperty            :onTargetContext ;
-                           owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger
-                         ] ;
-        rdfs:subClassOf  [ rdf:type                  owl:Restriction ;
-                           owl:onClass               :PreferenceAction ;
-                           owl:onProperty            :onPreferenceAction ;
-                           owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger
-                         ] ;
-        rdfs:subClassOf  [ rdf:type                  owl:Restriction ;
-                           owl:onClass               :PreferenceObject ;
-                           owl:onProperty            :onPreferenceObject ;
-                           owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger
-                         ] .
-
-:hasPreference  rdf:type        owl:ObjectProperty ;
-        rdfs:domain             :Policy ;
-        rdfs:range              :Preference ;
-        rdfs:subPropertyOf      owl:topObjectProperty ;
-        owl:propertyChainAxiom  ( :hasPart :hasPreference ) .
-
-:Universal_Description
-        rdf:type  :DescriptiveContext , owl:NamedIndividual .
-
-:PlayCategory  rdf:type  owl:Class ;
-        rdfs:subClassOf  :ApplicationCategory .
-
-:Application  rdf:type    owl:Class ;
-        rdfs:subClassOf   :TargetContext ;
-        rdfs:subClassOf   [ rdf:type        owl:Restriction ;
-                            owl:hasSelf     true ;
-                            owl:onProperty  :hasPartDirectly
-                          ] ;
-        rdfs:subClassOf   [ rdf:type            owl:Restriction ;
-                            owl:onProperty      :partOf ;
-                            owl:someValuesFrom  [ rdf:type   owl:Class ;
-                                                  owl:oneOf  ( :Universal_Target )
-                                                ]
-                          ] ;
-        owl:disjointWith  :ApplicationCategory .
-
-:UniversalObjectPreference
-        rdf:type             owl:Class ;
-        rdfs:subClassOf      :Preference ;
-        owl:equivalentClass  [ rdf:type            owl:Restriction ;
-                               owl:onProperty      :onPreferenceObject ;
-                               owl:someValuesFrom  [ rdf:type   owl:Class ;
-                                                     owl:oneOf  ( :Universal_Object )
-                                                   ]
-                             ] .
-
-:Act_Prompt_Group  rdf:type  owl:NamedIndividual .
-
-:PreferenceObject  rdf:type  owl:Class ;
-        rdfs:subClassOf  :ConditionalContext ;
-        rdfs:subClassOf  [ rdf:type           owl:Restriction ;
-                           owl:allValuesFrom  :Permission ;
-                           owl:onProperty     :hasPart
-                         ] .
+:Act_Prompt_Group  rdf:type  owl:NamedIndividual , :PreferenceAction .
 
 :Act_Prompt_Permission
-        rdf:type  owl:NamedIndividual .
+        rdf:type  owl:NamedIndividual , :PreferenceAction .
 
-:Universal_Target  rdf:type  owl:NamedIndividual , :TargetContext .
-
-:Prot_Signature  rdf:type  owl:NamedIndividual , :ProtectionLevel .
+device:Pol_Cece  rdf:type  owl:NamedIndividual , :Policy ;
+        :hasPart        device:Pol_Child , :Pol_Android ;
+        :hasPreference  device:Child_1 , :Android_1 , :Android_2 .
 
 :Policy  rdf:type        owl:Class ;
         rdfs:subClassOf  owl:Thing ;
@@ -200,189 +434,375 @@
                                                ]
                          ] .
 
-:Android_1  rdf:type           :Preference , owl:NamedIndividual ;
+device:Pol_Child  rdf:type  owl:NamedIndividual , :Policy ;
+        :hasPart        :Pol_Android ;
+        :hasPreference  device:Child_1 , :Android_1 , :Android_2 ;
+        :partOf         device:Pol_Cece .
+
+:Pol_Android  rdf:type  owl:NamedIndividual , :Policy ;
+        :hasPart        :Pol_Android ;
+        :hasPreference  :Android_1 , :Android_2 ;
+        :partOf         device:Pol_Cece , device:Pol_Child , :Pol_Android , device:Pol_Mary , device:Pol_Henry .
+
+:hasPreference  rdf:type        owl:ObjectProperty ;
+        rdfs:domain             :Policy ;
+        rdfs:range              :Preference ;
+        rdfs:subPropertyOf      owl:topObjectProperty ;
+        owl:propertyChainAxiom  ( :hasPart :hasPreference ) .
+
+:Android_1  rdf:type           owl:NamedIndividual , :Preference , :ProtectionLevelPreference , :UniversalTargetPreference ;
         :onDescriptiveContext  :Universal_Description ;
         :onPreferenceAction    :Act_Prompt_Group ;
         :onPreferenceObject    :Dangerous_Permissions ;
         :onTargetContext       :Universal_Target ;
         :priority              0 .
 
-:Time   rdf:type          owl:Class ;
-        rdfs:subClassOf   :DescriptiveContext ;
-        owl:disjointWith  [ rdf:type     owl:Class ;
-                            owl:unionOf  ( :Location :SocialEnvironment )
-                          ] .
-
-:TargetContext  rdf:type  owl:Class ;
-        rdfs:subClassOf   :ConditionalContext ;
-        rdfs:subClassOf   [ rdf:type           owl:Restriction ;
-                            owl:allValuesFrom  :Application ;
-                            owl:onProperty     :hasPart
-                          ] ;
-        owl:disjointWith  [ rdf:type     owl:Class ;
-                            owl:unionOf  ( :DescriptiveContext :PreferenceObject )
-                          ] .
-
-:Act_Not_Share  rdf:type  owl:NamedIndividual .
-
-:ProtectionLevel  rdf:type  owl:Class ;
-        rdfs:subClassOf  owl:Thing .
-
-:Prot_Dangerous  rdf:type  owl:NamedIndividual , :ProtectionLevel .
-
-:Dangerous_Permissions
-        rdf:type  owl:NamedIndividual , :PreferenceObject .
-
-:Act_Share  rdf:type  owl:NamedIndividual .
-
-:Background_Permissions
-        rdf:type  owl:NamedIndividual , :PreferenceObject .
-
-:Prot_Normal  rdf:type  owl:NamedIndividual , :ProtectionLevel .
-
-[ rdf:type             owl:AllDifferent ;
-  owl:distinctMembers  ( :Act_Prompt_Group :Act_Prompt_Permission )
-] .
-
-:Universal_Object  rdf:type  owl:NamedIndividual , :PreferenceObject .
-
-:GroupTargetPreference
-        rdf:type             owl:Class ;
-        rdfs:subClassOf      :Preference ;
-        owl:equivalentClass  [ rdf:type            owl:Restriction ;
-                               owl:onProperty      :onTargetContext ;
-                               owl:someValuesFrom  :ApplicationCategory
-                             ] .
-
-:hasPart  rdf:type          owl:TransitiveProperty , owl:ObjectProperty ;
-        rdfs:domain         owl:Thing ;
-        rdfs:range          owl:Thing ;
-        rdfs:subPropertyOf  owl:topObjectProperty ;
-        owl:inverseOf       :partOf .
-
-:ApplicationCategory  rdf:type  owl:Class ;
-        rdfs:subClassOf  :TargetContext .
-
-:Pol_Android  rdf:type  owl:NamedIndividual , :Policy ;
-        :hasPreference  :Android_1 , :Android_2 .
-
-:Normal_Permissions  rdf:type  owl:NamedIndividual , :PreferenceObject .
-
-:hasAuthor  rdf:type        owl:ObjectProperty ;
-        rdfs:domain         :Application ;
-        rdfs:range          :ApplicationAuthor ;
-        rdfs:subPropertyOf  owl:topObjectProperty .
-
-:onTargetContext  rdf:type  owl:ObjectProperty ;
-        rdfs:domain         :Preference ;
-        rdfs:range          :TargetContext ;
-        rdfs:subPropertyOf  owl:topObjectProperty .
-
-:onPreferenceObject  rdf:type  owl:ObjectProperty ;
-        rdfs:domain         :Preference ;
-        rdfs:range          :PreferenceObject ;
-        rdfs:subPropertyOf  owl:topObjectProperty .
-
-[ rdf:type             owl:AllDifferent ;
-  owl:distinctMembers  ( :Act_Prompt_Permission :Act_Share )
-] .
-
-[ rdf:type             owl:AllDifferent ;
-  owl:distinctMembers  ( :Prot_Dangerous :Prot_Normal )
-] .
-
-[ rdf:type             owl:AllDifferent ;
-  owl:distinctMembers  ( :Act_Not_Share :Act_Prompt_Group )
-] .
-
-:Android_2  rdf:type           :Preference , owl:NamedIndividual ;
+:Android_2  rdf:type           owl:NamedIndividual , :Preference , :ProtectionLevelPreference , :UniversalTargetPreference ;
         :onDescriptiveContext  :Universal_Description ;
         :onPreferenceAction    :Act_Share ;
         :onPreferenceObject    :Normal_Permissions ;
         :onTargetContext       :Universal_Target ;
         :priority              0 .
 
-:BackgroundPermission
-        rdf:type         owl:Class ;
-        rdfs:subClassOf  :Permission .
+perm:Process_Outgoing_Calls
+        rdf:type             :ConditionalContext , :DangerousPermission , owl:NamedIndividual , :PreferenceObject , :Permission ;
+        :hasPart             perm:Process_Outgoing_Calls ;
+        :hasPartDirectly     perm:Process_Outgoing_Calls ;
+        :hasProtectionLevel  :Prot_Dangerous ;
+        :partOf              :Dangerous_Permissions , :Universal_Object , perm:Group_Call_Log , perm:Process_Outgoing_Calls .
 
-:NormalPermission  rdf:type  owl:Class ;
-        rdfs:subClassOf  :Permission ;
-        rdfs:subClassOf  [ rdf:type     owl:Class ;
-                           owl:unionOf  ( [ rdf:type            owl:Restriction ;
-                                            owl:onProperty      :hasProtectionLevel ;
-                                            owl:someValuesFrom  [ rdf:type   owl:Class ;
-                                                                  owl:oneOf  ( :Prot_Normal )
-                                                                ]
-                                          ]
-                                          [ rdf:type            owl:Restriction ;
-                                            owl:onProperty      :hasProtectionLevel ;
-                                            owl:someValuesFrom  [ rdf:type   owl:Class ;
-                                                                  owl:oneOf  ( :Prot_Signature )
-                                                                ]
-                                          ]
-                                        )
-                         ] ;
-        rdfs:subClassOf  [ rdf:type            owl:Restriction ;
-                           owl:onProperty      :partOf ;
-                           owl:someValuesFrom  [ rdf:type   owl:Class ;
-                                                 owl:oneOf  ( :Normal_Permissions )
-                                               ]
-                         ] .
+perm:Call_Companion_App
+        rdf:type             :ConditionalContext , owl:NamedIndividual , :PreferenceObject , :Permission , :NormalPermission ;
+        :hasPart             perm:Call_Companion_App ;
+        :hasPartDirectly     perm:Call_Companion_App ;
+        :hasProtectionLevel  :Prot_Normal ;
+        :partOf              :Universal_Object , perm:Group_Phone , :Normal_Permissions , perm:Call_Companion_App .
 
-:onPreferenceAction  rdf:type  owl:ObjectProperty ;
-        rdfs:domain         :Preference ;
-        rdfs:range          :PreferenceAction ;
-        rdfs:subPropertyOf  owl:topObjectProperty .
+perm:Write_External_Storage
+        rdf:type             :ConditionalContext , :DangerousPermission , owl:NamedIndividual , :PreferenceObject , :Permission ;
+        :hasPart             perm:Write_External_Storage ;
+        :hasPartDirectly     perm:Write_External_Storage ;
+        :hasProtectionLevel  :Prot_Dangerous ;
+        :partOf              :Dangerous_Permissions , :Universal_Object , perm:Group_Storage , perm:Write_External_Storage .
 
-:Permission  rdf:type        owl:Class ;
-        rdfs:subClassOf      :PreferenceObject ;
-        rdfs:subClassOf      [ rdf:type        owl:Restriction ;
-                               owl:hasSelf     true ;
-                               owl:onProperty  :hasPartDirectly
-                             ] ;
-        rdfs:subClassOf      [ rdf:type                     owl:Restriction ;
-                               owl:maxQualifiedCardinality  "1"^^xsd:nonNegativeInteger ;
-                               owl:onClass                  [ rdf:type   owl:Class ;
-                                                              owl:oneOf  ( :Prot_Dangerous :Prot_Normal :Prot_Signature )
-                                                            ] ;
-                               owl:onProperty               :hasProtectionLevel
-                             ] ;
-        rdfs:subClassOf      [ rdf:type            owl:Restriction ;
-                               owl:onProperty      :partOf ;
-                               owl:someValuesFrom  [ rdf:type   owl:Class ;
-                                                     owl:oneOf  ( :Universal_Object )
-                                                   ]
-                             ] ;
-        owl:disjointWith     :PermissionGroup ;
-        owl:equivalentClass  [ rdf:type     owl:Class ;
-                               owl:unionOf  ( :DangerousPermission :NormalPermission )
-                             ] .
+:ApplicationAuthor  rdf:type  owl:Class ;
+        rdfs:subClassOf  owl:Thing .
 
-:SocialEnvironment  rdf:type  owl:Class ;
-        rdfs:subClassOf  :DescriptiveContext .
+:Application  rdf:type    owl:Class ;
+        rdfs:subClassOf   :TargetContext ;
+        rdfs:subClassOf   [ rdf:type            owl:Restriction ;
+                            owl:onProperty      :partOf ;
+                            owl:someValuesFrom  [ rdf:type   owl:Class ;
+                                                  owl:oneOf  ( :Universal_Target )
+                                                ]
+                          ] ;
+        rdfs:subClassOf   [ rdf:type        owl:Restriction ;
+                            owl:hasSelf     true ;
+                            owl:onProperty  :hasPartDirectly
+                          ] ;
+        owl:disjointWith  :DangerousPermission , :PreferenceObject , :Permission , :DescriptiveContext , :PermissionGroup , :PlayCategory , :NormalPermission , :ApplicationCategory , :CustomCategory , :Time , :SocialEnvironment , :Location , :BackgroundPermission .
+
+perm:Write_Calendar  rdf:type  :ConditionalContext , :DangerousPermission , owl:NamedIndividual , :PreferenceObject , :Permission ;
+        :hasPart             perm:Write_Calendar ;
+        :hasPartDirectly     perm:Write_Calendar ;
+        :hasProtectionLevel  :Prot_Dangerous ;
+        :partOf              :Dangerous_Permissions , :Universal_Object , perm:Group_Calendar , perm:Write_Calendar .
+
+:ProtectionLevel  rdf:type  owl:Class ;
+        rdfs:subClassOf  owl:Thing .
+
+device:PC_Business  rdf:type  :ConditionalContext , owl:NamedIndividual , :PlayCategory , :TargetContext , :ApplicationCategory ;
+        :hasPart  device:App_Zoom , device:App_Authenticator .
+
+device:App_Zoom  rdf:type  :ConditionalContext , owl:NamedIndividual , :TargetContext , :Application ;
+        :hasAuthor        device:Author_Zoom_us ;
+        :hasPart          device:App_Zoom ;
+        :hasPartDirectly  device:App_Zoom ;
+        :partOf           :Universal_Target , device:PC_Business , device:App_Zoom , device:CC_Work_Apps .
+
+device:App_Authenticator
+        rdf:type          :ConditionalContext , owl:NamedIndividual , :TargetContext , :Application ;
+        :hasAuthor        device:Author_Microsoft_Cooperation ;
+        :hasPart          device:App_Authenticator ;
+        :hasPartDirectly  device:App_Authenticator ;
+        :partOf           :Universal_Target , device:CC_Microsoft_Apps , device:PC_Business , device:App_Authenticator , device:CC_Work_Apps .
+
+<http://www.semanticweb.org/ontologies/2022/1/apso>
+        rdf:type  owl:Ontology .
+
+perm:Group_Contacts  rdf:type  :ConditionalContext , owl:NamedIndividual , :PreferenceObject , :PermissionGroup ;
+        :hasPart  perm:Read_Contacts , perm:Write_Contacts .
+
+perm:Read_Contacts  rdf:type  :ConditionalContext , :DangerousPermission , owl:NamedIndividual , :PreferenceObject , :Permission ;
+        :hasPart             perm:Read_Contacts ;
+        :hasPartDirectly     perm:Read_Contacts ;
+        :hasProtectionLevel  :Prot_Dangerous ;
+        :partOf              :Dangerous_Permissions , :Universal_Object , perm:Group_Contacts , perm:Read_Contacts .
+
+perm:Write_Contacts  rdf:type  :ConditionalContext , :DangerousPermission , owl:NamedIndividual , :PreferenceObject , :Permission ;
+        :hasPart             perm:Write_Contacts ;
+        :hasPartDirectly     perm:Write_Contacts ;
+        :hasProtectionLevel  :Prot_Dangerous ;
+        :partOf              :Dangerous_Permissions , :Universal_Object , perm:Group_Contacts , perm:Write_Contacts .
+
+perm:Accept_Handover  rdf:type  :ConditionalContext , :DangerousPermission , owl:NamedIndividual , :PreferenceObject , :Permission ;
+        :hasPart             perm:Accept_Handover ;
+        :hasPartDirectly     perm:Accept_Handover ;
+        :hasProtectionLevel  :Prot_Dangerous ;
+        :partOf              :Dangerous_Permissions , :Universal_Object , perm:Group_Phone , perm:Accept_Handover .
 
 [ rdf:type             owl:AllDifferent ;
-  owl:distinctMembers  ( :Act_Not_Share :Act_Share )
+  owl:distinctMembers  ( :Prot_Dangerous :Prot_Normal )
 ] .
 
-:CustomCategory  rdf:type  owl:Class ;
-        rdfs:subClassOf  :ApplicationCategory .
+perm:Manage_Media  rdf:type  :ConditionalContext , owl:NamedIndividual , :PreferenceObject , :Permission , :NormalPermission ;
+        :hasPart             perm:Manage_Media ;
+        :hasPartDirectly     perm:Manage_Media ;
+        :hasProtectionLevel  :Prot_Signature ;
+        :partOf              :Universal_Object , :Normal_Permissions , perm:Group_Storage , perm:Manage_Media .
 
-:Location  rdf:type       owl:Class ;
-        rdfs:subClassOf   :DescriptiveContext ;
-        owl:disjointWith  :SocialEnvironment .
+:BackgroundPermission
+        rdf:type          owl:Class ;
+        rdfs:subClassOf   :Permission ;
+        owl:disjointWith  :DescriptiveContext , :PermissionGroup , :PlayCategory , :TargetContext , :CustomCategory , :Time , :SocialEnvironment , :Location .
 
-:priority  rdf:type  owl:DatatypeProperty ;
-        rdfs:domain  :Preference ;
-        rdfs:range   xsd:nonNegativeInteger .
+device:Mary_1  rdf:type        owl:NamedIndividual , :Preference , :UniversalObjectPreference , :GroupTargetPreference ;
+        :onDescriptiveContext  device:DC_At_Work ;
+        :onPreferenceAction    :Act_Share ;
+        :onPreferenceObject    :Universal_Object ;
+        :onTargetContext       device:CC_Work_Apps ;
+        :priority              1 .
 
-:hasPartDirectly  rdf:type  owl:ObjectProperty ;
-        rdfs:domain         owl:Thing ;
-        rdfs:range          owl:Thing ;
-        rdfs:subPropertyOf  :hasPart .
+device:CC_Work_Apps  rdf:type  :ConditionalContext , owl:NamedIndividual , :TargetContext , :ApplicationCategory , :CustomCategory ;
+        :hasPart  device:App_Zoom , device:App_Authenticator .
 
-:partOf  rdf:type           owl:TransitiveProperty , owl:ObjectProperty ;
-        rdfs:domain         owl:Thing ;
-        rdfs:range          owl:Thing ;
+:hasAuthor  rdf:type        owl:ObjectProperty ;
+        rdfs:domain         :Application ;
+        rdfs:range          :ApplicationAuthor ;
         rdfs:subPropertyOf  owl:topObjectProperty .
+
+device:Author_NRK  rdf:type  owl:NamedIndividual , :ApplicationAuthor .
+
+device:PC_Entertainment
+        rdf:type  :ConditionalContext , owl:NamedIndividual , :PlayCategory , :TargetContext , :ApplicationCategory ;
+        :hasPart  device:App_NRKTV .
+
+perm:Use_Biometric  rdf:type  :ConditionalContext , owl:NamedIndividual , :PreferenceObject , :Permission , :NormalPermission ;
+        :hasPart             perm:Use_Biometric ;
+        :hasPartDirectly     perm:Use_Biometric ;
+        :hasProtectionLevel  :Prot_Normal ;
+        :partOf              :Universal_Object , :Normal_Permissions , perm:Use_Biometric , perm:Group_Sensors .
+
+perm:Group_Sensors  rdf:type  :ConditionalContext , owl:NamedIndividual , :PreferenceObject , :PermissionGroup ;
+        :hasPart  perm:Use_Biometric , perm:Use_Fingerprint , perm:Body_Sensors , perm:High_Sampling_Rate_Sensors .
+
+perm:Use_Fingerprint  rdf:type  :ConditionalContext , owl:NamedIndividual , :PreferenceObject , :Permission , :NormalPermission ;
+        :hasPart             perm:Use_Fingerprint ;
+        :hasPartDirectly     perm:Use_Fingerprint ;
+        :hasProtectionLevel  :Prot_Normal ;
+        :partOf              :Universal_Object , :Normal_Permissions , perm:Group_Sensors , perm:Use_Fingerprint .
+
+perm:Group_Microphone
+        rdf:type  :ConditionalContext , owl:NamedIndividual , :PreferenceObject , :PermissionGroup ;
+        :hasPart  perm:Record_Audio .
+
+perm:Record_Audio  rdf:type  :ConditionalContext , :DangerousPermission , owl:NamedIndividual , :PreferenceObject , :Permission ;
+        :hasPart             perm:Record_Audio ;
+        :hasPartDirectly     perm:Record_Audio ;
+        :hasProtectionLevel  :Prot_Dangerous ;
+        :partOf              :Dangerous_Permissions , :Universal_Object , perm:Group_Microphone , perm:Record_Audio .
+
+perm:Access_Media_Location
+        rdf:type             :ConditionalContext , :DangerousPermission , owl:NamedIndividual , :PreferenceObject , :Permission ;
+        :hasPart             perm:Access_Media_Location ;
+        :hasPartDirectly     perm:Access_Media_Location ;
+        :hasProtectionLevel  :Prot_Dangerous ;
+        :partOf              :Dangerous_Permissions , :Universal_Object , perm:Group_Storage , perm:Access_Media_Location .
+
+[ rdf:type             owl:AllDifferent ;
+  owl:distinctMembers  ( :Act_Not_Share :Act_Prompt_Permission )
+] .
+
+perm:Camera  rdf:type        :ConditionalContext , :DangerousPermission , owl:NamedIndividual , :PreferenceObject , :Permission ;
+        :hasPart             perm:Camera ;
+        :hasPartDirectly     perm:Camera ;
+        :hasProtectionLevel  :Prot_Dangerous ;
+        :partOf              :Dangerous_Permissions , :Universal_Object , perm:Camera , perm:Group_Camera .
+
+perm:Group_Camera  rdf:type  :ConditionalContext , owl:NamedIndividual , :PreferenceObject , :PermissionGroup ;
+        :hasPart  perm:Camera .
+
+device:Author_Zoom_us
+        rdf:type  owl:NamedIndividual , :ApplicationAuthor .
+
+perm:Receive_Mms  rdf:type   :ConditionalContext , :DangerousPermission , owl:NamedIndividual , :PreferenceObject , :Permission ;
+        :hasPart             perm:Receive_Mms ;
+        :hasPartDirectly     perm:Receive_Mms ;
+        :hasProtectionLevel  :Prot_Dangerous ;
+        :partOf              :Dangerous_Permissions , :Universal_Object , perm:Receive_Mms , perm:Group_Sms .
+
+perm:Group_Sms  rdf:type  :ConditionalContext , owl:NamedIndividual , :PreferenceObject , :PermissionGroup ;
+        :hasPart  perm:Receive_Mms , perm:Receive_Sms , perm:Send_Sms , perm:Receive_Wap_Push , perm:Read_Sms .
+
+perm:Use_Sip  rdf:type       :ConditionalContext , :DangerousPermission , owl:NamedIndividual , :PreferenceObject , :Permission ;
+        :hasPart             perm:Use_Sip ;
+        :hasPartDirectly     perm:Use_Sip ;
+        :hasProtectionLevel  :Prot_Dangerous ;
+        :partOf              :Dangerous_Permissions , :Universal_Object , perm:Group_Phone , perm:Use_Sip .
+
+perm:Access_Fine_Location
+        rdf:type             :ConditionalContext , :DangerousPermission , owl:NamedIndividual , :PreferenceObject , :Permission ;
+        :hasPart             perm:Access_Fine_Location ;
+        :hasPartDirectly     perm:Access_Fine_Location ;
+        :hasProtectionLevel  :Prot_Dangerous ;
+        :partOf              perm:Group_Location , :Dangerous_Permissions , :Universal_Object , perm:Access_Fine_Location .
+
+perm:Add_Voicemail  rdf:type  :ConditionalContext , :DangerousPermission , owl:NamedIndividual , :PreferenceObject , :Permission ;
+        :hasPart             perm:Add_Voicemail ;
+        :hasPartDirectly     perm:Add_Voicemail ;
+        :hasProtectionLevel  :Prot_Dangerous ;
+        :partOf              :Dangerous_Permissions , :Universal_Object , perm:Group_Phone , perm:Add_Voicemail .
+
+[ rdf:type             owl:AllDifferent ;
+  owl:distinctMembers  ( :Act_Prompt_Permission :Act_Share )
+] .
+
+[ rdf:type             owl:AllDifferent ;
+  owl:distinctMembers  ( :Act_Prompt_Group :Act_Share )
+] .
+
+perm:Activity_Recognition
+        rdf:type             :ConditionalContext , :DangerousPermission , owl:NamedIndividual , :PreferenceObject , :Permission ;
+        :hasPart             perm:Activity_Recognition ;
+        :hasPartDirectly     perm:Activity_Recognition ;
+        :hasProtectionLevel  :Prot_Dangerous ;
+        :partOf              :Dangerous_Permissions , :Universal_Object , perm:Activity_Recognition , perm:Group_Activity_Recognition .
+
+perm:Group_Activity_Recognition
+        rdf:type  :ConditionalContext , owl:NamedIndividual , :PreferenceObject , :PermissionGroup ;
+        :hasPart  perm:Activity_Recognition .
+
+perm:Manage_External_Storage
+        rdf:type             :ConditionalContext , owl:NamedIndividual , :PreferenceObject , :Permission , :NormalPermission ;
+        :hasPart             perm:Manage_External_Storage ;
+        :hasPartDirectly     perm:Manage_External_Storage ;
+        :hasProtectionLevel  :Prot_Signature ;
+        :partOf              :Universal_Object , :Normal_Permissions , perm:Group_Storage , perm:Manage_External_Storage .
+
+perm:Call_Phone  rdf:type    :ConditionalContext , :DangerousPermission , owl:NamedIndividual , :PreferenceObject , :Permission ;
+        :hasPart             perm:Call_Phone ;
+        :hasPartDirectly     perm:Call_Phone ;
+        :hasProtectionLevel  :Prot_Dangerous ;
+        :partOf              :Dangerous_Permissions , :Universal_Object , perm:Group_Phone , perm:Call_Phone .
+
+perm:Read_Phone_Numbers
+        rdf:type             :ConditionalContext , :DangerousPermission , owl:NamedIndividual , :PreferenceObject , :Permission ;
+        :hasPart             perm:Read_Phone_Numbers ;
+        :hasPartDirectly     perm:Read_Phone_Numbers ;
+        :hasProtectionLevel  :Prot_Dangerous ;
+        :partOf              :Dangerous_Permissions , :Universal_Object , perm:Group_Phone , perm:Read_Phone_Numbers .
+
+perm:Manage_Own_Calls
+        rdf:type             :ConditionalContext , owl:NamedIndividual , :PreferenceObject , :Permission , :NormalPermission ;
+        :hasPart             perm:Manage_Own_Calls ;
+        :hasPartDirectly     perm:Manage_Own_Calls ;
+        :hasProtectionLevel  :Prot_Normal ;
+        :partOf              :Universal_Object , perm:Group_Phone , :Normal_Permissions , perm:Manage_Own_Calls .
+
+perm:Read_Phone_State
+        rdf:type             :ConditionalContext , :DangerousPermission , owl:NamedIndividual , :PreferenceObject , :Permission ;
+        :hasPart             perm:Read_Phone_State ;
+        :hasPartDirectly     perm:Read_Phone_State ;
+        :hasProtectionLevel  :Prot_Dangerous ;
+        :partOf              :Dangerous_Permissions , :Universal_Object , perm:Group_Phone , perm:Read_Phone_State .
+
+perm:Answer_Phone_Calls
+        rdf:type             :ConditionalContext , :DangerousPermission , owl:NamedIndividual , :PreferenceObject , :Permission ;
+        :hasPart             perm:Answer_Phone_Calls ;
+        :hasPartDirectly     perm:Answer_Phone_Calls ;
+        :hasProtectionLevel  :Prot_Dangerous ;
+        :partOf              :Dangerous_Permissions , :Universal_Object , perm:Group_Phone , perm:Answer_Phone_Calls .
+
+perm:Receive_Sms  rdf:type   :ConditionalContext , :DangerousPermission , owl:NamedIndividual , :PreferenceObject , :Permission ;
+        :hasPart             perm:Receive_Sms ;
+        :hasPartDirectly     perm:Receive_Sms ;
+        :hasProtectionLevel  :Prot_Dangerous ;
+        :partOf              :Dangerous_Permissions , :Universal_Object , perm:Group_Sms , perm:Receive_Sms .
+
+perm:Send_Sms  rdf:type      :ConditionalContext , :DangerousPermission , owl:NamedIndividual , :PreferenceObject , :Permission ;
+        :hasPart             perm:Send_Sms ;
+        :hasPartDirectly     perm:Send_Sms ;
+        :hasProtectionLevel  :Prot_Dangerous ;
+        :partOf              :Dangerous_Permissions , :Universal_Object , perm:Group_Sms , perm:Send_Sms .
+
+perm:Receive_Wap_Push
+        rdf:type             :ConditionalContext , :DangerousPermission , owl:NamedIndividual , :PreferenceObject , :Permission ;
+        :hasPart             perm:Receive_Wap_Push ;
+        :hasPartDirectly     perm:Receive_Wap_Push ;
+        :hasProtectionLevel  :Prot_Dangerous ;
+        :partOf              :Dangerous_Permissions , :Universal_Object , perm:Group_Sms , perm:Receive_Wap_Push .
+
+perm:Body_Sensors  rdf:type  :ConditionalContext , :DangerousPermission , owl:NamedIndividual , :PreferenceObject , :Permission ;
+        :hasPart             perm:Body_Sensors ;
+        :hasPartDirectly     perm:Body_Sensors ;
+        :hasProtectionLevel  :Prot_Dangerous ;
+        :partOf              :Dangerous_Permissions , :Universal_Object , perm:Group_Sensors , perm:Body_Sensors .
+
+perm:Read_Sms  rdf:type      :ConditionalContext , :DangerousPermission , owl:NamedIndividual , :PreferenceObject , :Permission ;
+        :hasPart             perm:Read_Sms ;
+        :hasPartDirectly     perm:Read_Sms ;
+        :hasProtectionLevel  :Prot_Dangerous ;
+        :partOf              :Dangerous_Permissions , :Universal_Object , perm:Group_Sms , perm:Read_Sms .
+
+perm:Read_Call_Log  rdf:type  :ConditionalContext , :DangerousPermission , owl:NamedIndividual , :PreferenceObject , :Permission ;
+        :hasPart             perm:Read_Call_Log ;
+        :hasPartDirectly     perm:Read_Call_Log ;
+        :hasProtectionLevel  :Prot_Dangerous ;
+        :partOf              :Dangerous_Permissions , :Universal_Object , perm:Group_Call_Log , perm:Read_Call_Log .
+
+:Background_Permissions
+        rdf:type  :ConditionalContext , owl:NamedIndividual , :PreferenceObject ;
+        :hasPart  perm:Access_Background_Location .
+
+perm:High_Sampling_Rate_Sensors
+        rdf:type             :ConditionalContext , owl:NamedIndividual , :PreferenceObject , :Permission , :NormalPermission ;
+        :hasPart             perm:High_Sampling_Rate_Sensors ;
+        :hasPartDirectly     perm:High_Sampling_Rate_Sensors ;
+        :hasProtectionLevel  :Prot_Normal ;
+        :partOf              :Universal_Object , :Normal_Permissions , perm:Group_Sensors , perm:High_Sampling_Rate_Sensors .
+
+device:Author_Microsoft_Cooperation
+        rdf:type  owl:NamedIndividual , :ApplicationAuthor .
+
+[ rdf:type             owl:AllDifferent ;
+  owl:distinctMembers  ( :Prot_Normal :Prot_Signature )
+] .
+
+device:PC_Medical  rdf:type  :ConditionalContext , owl:NamedIndividual , :PlayCategory , :TargetContext , :ApplicationCategory ;
+        :hasPart  device:App_Hjelp113 .
+
+device:Pol_Mary  rdf:type  owl:NamedIndividual , :Policy ;
+        :hasPart        :Pol_Android ;
+        :hasPreference  :Android_1 , :Android_2 , device:Mary_1 .
+
+device:Pol_Henry  rdf:type  owl:NamedIndividual , :Policy ;
+        :hasPart        :Pol_Android ;
+        :hasPreference  device:Henry_3 , device:Henry_1 , :Android_1 , :Android_2 , device:Henry_2 .
+
+[ rdf:type             owl:AllDifferent ;
+  owl:distinctMembers  ( :Act_Not_Share :Act_Prompt_Group )
+] .
+
+device:Author_Stiftelsen_Norsk_Luftambulanse
+        rdf:type  owl:NamedIndividual , :ApplicationAuthor .
+
+device:Henry_2  rdf:type       owl:NamedIndividual , :Preference , :UniversalTargetPreference ;
+        :onDescriptiveContext  :Universal_Description ;
+        :onPreferenceAction    :Act_Not_Share ;
+        :onPreferenceObject    perm:Access_Background_Location ;
+        :onTargetContext       :Universal_Target ;
+        :priority              2 .
+
+[ rdf:type             owl:AllDifferent ;
+  owl:distinctMembers  ( :Act_Prompt_Group :Act_Prompt_Permission )
+] .

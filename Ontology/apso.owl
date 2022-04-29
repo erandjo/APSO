@@ -5,7 +5,9 @@
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+     xmlns:perm="http://www.semanticweb.org/ontologies/2022/1/apso/perm#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:device="http://www.semanticweb.org/ontologies/2022/1/apso/device#">
     <owl:Ontology rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/"/>
     
 
@@ -508,6 +510,13 @@
                 <owl:onClass rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#TargetContext"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#priority"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -724,6 +733,7 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Background_Permissions">
         <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#PreferenceObject"/>
+        <hasPart rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Access_Background_Location"/>
     </owl:NamedIndividual>
     
 
@@ -798,6 +808,699 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/core#Universal_Target">
         <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#TargetContext"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/device#App_Authenticator -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/device#App_Authenticator">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Application"/>
+        <hasAuthor rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/device#Author_Microsoft_Cooperation"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/device#CC_Work_Apps"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/device#PC_Business"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/device#App_Hjelp113 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/device#App_Hjelp113">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Application"/>
+        <hasAuthor rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/device#Author_Stiftelsen_Norsk_Luftambulanse"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/device#PC_Medical"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/device#App_NRKTV -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/device#App_NRKTV">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Application"/>
+        <hasAuthor rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/device#Author_NRK"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/device#PC_Entertainment"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/device#App_Zoom -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/device#App_Zoom">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Application"/>
+        <hasAuthor rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/device#Author_Zoom_us"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/device#CC_Work_Apps"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/device#PC_Business"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/device#Author_Microsoft_Cooperation -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/device#Author_Microsoft_Cooperation">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#ApplicationAuthor"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/device#Author_NRK -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/device#Author_NRK">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#ApplicationAuthor"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/device#Author_Stiftelsen_Norsk_Luftambulanse -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/device#Author_Stiftelsen_Norsk_Luftambulanse">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#ApplicationAuthor"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/device#Author_Zoom_us -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/device#Author_Zoom_us">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#ApplicationAuthor"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/device#CC_Mary_Approved_Apps -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/device#CC_Mary_Approved_Apps">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#CustomCategory"/>
+        <hasPart rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/device#App_NRKTV"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/device#CC_Microsoft_Apps -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/device#CC_Microsoft_Apps">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#CustomCategory"/>
+        <hasPart rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/device#App_Authenticator"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/device#CC_Work_Apps -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/device#CC_Work_Apps">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#CustomCategory"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/device#Child_1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/device#Child_1">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Preference"/>
+        <onDescriptiveContext rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Universal_Description"/>
+        <onPreferenceAction rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Act_Share"/>
+        <onPreferenceObject rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Universal_Object"/>
+        <onTargetContext rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/device#CC_Mary_Approved_Apps"/>
+        <priority rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</priority>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/device#DC_At_Work -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/device#DC_At_Work">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#DescriptiveContext"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/device#Henry_1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/device#Henry_1">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Preference"/>
+        <onDescriptiveContext rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Universal_Description"/>
+        <onPreferenceAction rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Act_Share"/>
+        <onPreferenceObject rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Universal_Object"/>
+        <onTargetContext rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/device#CC_Microsoft_Apps"/>
+        <priority rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</priority>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/device#Henry_2 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/device#Henry_2">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Preference"/>
+        <onDescriptiveContext rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Universal_Description"/>
+        <onPreferenceAction rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Act_Not_Share"/>
+        <onPreferenceObject rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Access_Background_Location"/>
+        <onTargetContext rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Universal_Target"/>
+        <priority rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</priority>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/device#Henry_3 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/device#Henry_3">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Preference"/>
+        <onDescriptiveContext rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Universal_Description"/>
+        <onPreferenceAction rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Act_Share"/>
+        <onPreferenceObject rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Access_Background_Location"/>
+        <onTargetContext rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/device#App_Hjelp113"/>
+        <priority rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</priority>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/device#Mary_1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/device#Mary_1">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Preference"/>
+        <onDescriptiveContext rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/device#DC_At_Work"/>
+        <onPreferenceAction rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Act_Share"/>
+        <onPreferenceObject rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Universal_Object"/>
+        <onTargetContext rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/device#CC_Work_Apps"/>
+        <priority rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</priority>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/device#PC_Business -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/device#PC_Business">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#PlayCategory"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/device#PC_Entertainment -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/device#PC_Entertainment">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#PlayCategory"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/device#PC_Medical -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/device#PC_Medical">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#PlayCategory"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/device#Pol_Cece -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/device#Pol_Cece">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Policy"/>
+        <hasPart rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/device#Pol_Child"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/device#Pol_Child -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/device#Pol_Child">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Policy"/>
+        <hasPreference rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/device#Child_1"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/device#Pol_Henry -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/device#Pol_Henry">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Policy"/>
+        <hasPreference rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/device#Henry_1"/>
+        <hasPreference rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/device#Henry_2"/>
+        <hasPreference rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/device#Henry_3"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/device#Pol_Mary -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/device#Pol_Mary">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Policy"/>
+        <hasPreference rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/device#Mary_1"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Accept_Handover -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Accept_Handover">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <hasProtectionLevel rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Dangerous"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Phone"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Access_Background_Location -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Access_Background_Location">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <hasProtectionLevel rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Dangerous"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Location"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Access_Coarse_Location -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Access_Coarse_Location">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <hasProtectionLevel rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Dangerous"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Location"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Access_Fine_Location -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Access_Fine_Location">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <hasProtectionLevel rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Dangerous"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Location"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Access_Media_Location -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Access_Media_Location">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <hasProtectionLevel rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Dangerous"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Storage"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Activity_Recognition -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Activity_Recognition">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <hasProtectionLevel rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Dangerous"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Activity_Recognition"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Add_Voicemail -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Add_Voicemail">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <hasProtectionLevel rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Dangerous"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Phone"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Answer_Phone_Calls -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Answer_Phone_Calls">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <hasProtectionLevel rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Dangerous"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Phone"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Body_Sensors -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Body_Sensors">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <hasProtectionLevel rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Dangerous"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Sensors"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Call_Companion_App -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Call_Companion_App">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <hasProtectionLevel rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Normal"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Phone"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Call_Phone -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Call_Phone">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <hasProtectionLevel rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Dangerous"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Phone"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Camera -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Camera">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <hasProtectionLevel rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Dangerous"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Camera"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Activity_Recognition -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Activity_Recognition">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#PermissionGroup"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Calendar -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Calendar">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#PermissionGroup"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Call_Log -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Call_Log">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#PermissionGroup"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Camera -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Camera">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#PermissionGroup"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Contacts -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Contacts">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#PermissionGroup"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Location -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Location">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#PermissionGroup"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Microphone -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Microphone">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#PermissionGroup"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Phone -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Phone">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#PermissionGroup"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Sensors -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Sensors">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#PermissionGroup"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Sms -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Sms">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#PermissionGroup"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Storage -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Storage">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#PermissionGroup"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#High_Sampling_Rate_Sensors -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#High_Sampling_Rate_Sensors">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <hasProtectionLevel rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Normal"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Sensors"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Manage_External_Storage -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Manage_External_Storage">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <hasProtectionLevel rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Signature"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Storage"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Manage_Media -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Manage_Media">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <hasProtectionLevel rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Signature"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Storage"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Manage_Own_Calls -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Manage_Own_Calls">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <hasProtectionLevel rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Normal"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Phone"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Process_Outgoing_Calls -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Process_Outgoing_Calls">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <hasProtectionLevel rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Dangerous"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Call_Log"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Read_Basic_Phone_State -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Read_Basic_Phone_State">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <hasProtectionLevel rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Normal"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Phone"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Read_Calendar -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Read_Calendar">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <hasProtectionLevel rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Dangerous"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Calendar"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Read_Call_Log -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Read_Call_Log">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <hasProtectionLevel rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Dangerous"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Call_Log"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Read_Contacts -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Read_Contacts">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <hasProtectionLevel rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Dangerous"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Contacts"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Read_External_Storage -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Read_External_Storage">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <hasProtectionLevel rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Dangerous"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Storage"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Read_Phone_Numbers -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Read_Phone_Numbers">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <hasProtectionLevel rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Dangerous"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Phone"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Read_Phone_State -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Read_Phone_State">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <hasProtectionLevel rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Dangerous"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Phone"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Read_Sms -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Read_Sms">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <hasProtectionLevel rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Dangerous"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Sms"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Receive_Mms -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Receive_Mms">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <hasProtectionLevel rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Dangerous"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Sms"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Receive_Sms -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Receive_Sms">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <hasProtectionLevel rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Dangerous"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Sms"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Receive_Wap_Push -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Receive_Wap_Push">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <hasProtectionLevel rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Dangerous"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Sms"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Record_Audio -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Record_Audio">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <hasProtectionLevel rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Dangerous"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Microphone"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Send_Sms -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Send_Sms">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <hasProtectionLevel rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Dangerous"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Sms"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Use_Biometric -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Use_Biometric">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <hasProtectionLevel rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Normal"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Sensors"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Use_Fingerprint -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Use_Fingerprint">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <hasProtectionLevel rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Normal"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Sensors"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Use_Sip -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Use_Sip">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <hasProtectionLevel rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Dangerous"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Phone"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Write_Calendar -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Write_Calendar">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <hasProtectionLevel rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Dangerous"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Calendar"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Write_Call_Log -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Write_Call_Log">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <hasProtectionLevel rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Dangerous"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Call_Log"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Write_Contacts -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Write_Contacts">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <hasProtectionLevel rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Dangerous"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Contacts"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2022/1/apso/perm#Write_External_Storage -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Write_External_Storage">
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Permission"/>
+        <hasProtectionLevel rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/core#Prot_Dangerous"/>
+        <partOf rdf:resource="http://www.semanticweb.org/ontologies/2022/1/apso/perm#Group_Storage"/>
     </owl:NamedIndividual>
     
 
