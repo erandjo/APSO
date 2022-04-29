@@ -1,0 +1,16 @@
+name: master_2021
+channels:
+  - defaults
+dependencies:
+  - python
+  - jupyter
+  - numpy
+  - scipy
+  - matplotlib
+  - pandas
+  - seaborn
+  - scikit-learn
+  - nltk
+  - spacy
+  - gensim
+  - python-levenshtein

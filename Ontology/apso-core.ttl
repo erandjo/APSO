@@ -1,0 +1,388 @@
+@prefix :     <http://www.semanticweb.org/ontologies/2022/1/apso/core#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+:DescriptiveContext  rdf:type  owl:Class ;
+        rdfs:subClassOf   :ConditionalContext ;
+        rdfs:subClassOf   [ rdf:type            owl:Restriction ;
+                            owl:onProperty      :partOf ;
+                            owl:someValuesFrom  [ rdf:type   owl:Class ;
+                                                  owl:oneOf  ( :Universal_Description )
+                                                ]
+                          ] ;
+        rdfs:subClassOf   [ rdf:type           owl:Restriction ;
+                            owl:allValuesFrom  :DescriptiveContext ;
+                            owl:onProperty     :hasPart
+                          ] ;
+        rdfs:subClassOf   [ rdf:type        owl:Restriction ;
+                            owl:hasSelf     true ;
+                            owl:onProperty  :hasPartDirectly
+                          ] ;
+        owl:disjointWith  :PreferenceObject .
+
+:ConditionalContext  rdf:type  owl:Class ;
+        rdfs:subClassOf      owl:Thing ;
+        owl:equivalentClass  [ rdf:type     owl:Class ;
+                               owl:unionOf  ( :DescriptiveContext :PreferenceObject :TargetContext )
+                             ] .
+
+[ rdf:type             owl:AllDifferent ;
+  owl:distinctMembers  ( :Act_Prompt_Group :Act_Share )
+] .
+
+:PermissionGroupPreference
+        rdf:type             owl:Class ;
+        rdfs:subClassOf      :Preference ;
+        owl:equivalentClass  [ rdf:type            owl:Restriction ;
+                               owl:onProperty      :onPreferenceObject ;
+                               owl:someValuesFrom  :PermissionGroup
+                             ] .
+
+:ProtectionLevelPreference
+        rdf:type             owl:Class ;
+        rdfs:subClassOf      :Preference ;
+        owl:equivalentClass  [ rdf:type            owl:Restriction ;
+                               owl:onProperty      :onPreferenceObject ;
+                               owl:someValuesFrom  [ rdf:type   owl:Class ;
+                                                     owl:oneOf  ( :Dangerous_Permissions :Normal_Permissions )
+                                                   ]
+                             ] .
+
+:DangerousPermission  rdf:type  owl:Class ;
+        rdfs:subClassOf  :Permission ;
+        rdfs:subClassOf  [ rdf:type            owl:Restriction ;
+                           owl:onProperty      :partOf ;
+                           owl:someValuesFrom  [ rdf:type   owl:Class ;
+                                                 owl:oneOf  ( :Dangerous_Permissions )
+                                               ]
+                         ] ;
+        rdfs:subClassOf  [ rdf:type            owl:Restriction ;
+                           owl:onProperty      :hasProtectionLevel ;
+                           owl:someValuesFrom  [ rdf:type   owl:Class ;
+                                                 owl:oneOf  ( :Prot_Dangerous )
+                                               ]
+                         ] .
+
+:UniversalTargetPreference
+        rdf:type             owl:Class ;
+        rdfs:subClassOf      :Preference ;
+        owl:equivalentClass  [ rdf:type            owl:Restriction ;
+                               owl:onProperty      :onTargetContext ;
+                               owl:someValuesFrom  [ rdf:type   owl:Class ;
+                                                     owl:oneOf  ( :Universal_Target )
+                                                   ]
+                             ] .
+
+:onDescriptiveContext
+        rdf:type            owl:ObjectProperty ;
+        rdfs:domain         :Preference ;
+        rdfs:range          :DescriptiveContext ;
+        rdfs:subPropertyOf  owl:topObjectProperty .
+
+:PreferenceAction  rdf:type  owl:Class ;
+        rdfs:subClassOf      owl:Thing ;
+        owl:equivalentClass  [ rdf:type   owl:Class ;
+                               owl:oneOf  ( :Act_Not_Share :Act_Prompt_Group :Act_Prompt_Permission :Act_Share )
+                             ] .
+
+:ApplicationAuthor  rdf:type  owl:Class ;
+        rdfs:subClassOf  owl:Thing .
+
+:ApplicationTargetPreference
+        rdf:type             owl:Class ;
+        rdfs:subClassOf      :Preference ;
+        owl:equivalentClass  [ rdf:type            owl:Restriction ;
+                               owl:onProperty      :onTargetContext ;
+                               owl:someValuesFrom  :Application
+                             ] .
+
+[ rdf:type             owl:AllDifferent ;
+  owl:distinctMembers  ( :Prot_Normal :Prot_Signature )
+] .
+
+[ rdf:type             owl:AllDifferent ;
+  owl:distinctMembers  ( :Act_Not_Share :Act_Prompt_Permission )
+] .
+
+:PermissionGroup  rdf:type  owl:Class ;
+        rdfs:subClassOf  :PreferenceObject .
+
+[ rdf:type             owl:AllDifferent ;
+  owl:distinctMembers  ( :Prot_Dangerous :Prot_Signature )
+] .
+
+:hasProtectionLevel  rdf:type  owl:ObjectProperty ;
+        rdfs:domain         :Permission ;
+        rdfs:range          :ProtectionLevel ;
+        rdfs:subPropertyOf  owl:topObjectProperty .
+
+<http://www.semanticweb.org/ontologies/2022/1/apso/>
+        rdf:type  owl:Ontology .
+
+:Preference  rdf:type    owl:Class ;
+        rdfs:subClassOf  owl:Thing ;
+        rdfs:subClassOf  [ rdf:type                  owl:Restriction ;
+                           owl:onClass               :TargetContext ;
+                           owl:onProperty            :onTargetContext ;
+                           owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger
+                         ] ;
+        rdfs:subClassOf  [ rdf:type                  owl:Restriction ;
+                           owl:onClass               :PreferenceAction ;
+                           owl:onProperty            :onPreferenceAction ;
+                           owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger
+                         ] ;
+        rdfs:subClassOf  [ rdf:type                  owl:Restriction ;
+                           owl:onClass               :PreferenceObject ;
+                           owl:onProperty            :onPreferenceObject ;
+                           owl:qualifiedCardinality  "1"^^xsd:nonNegativeInteger
+                         ] .
+
+:hasPreference  rdf:type        owl:ObjectProperty ;
+        rdfs:domain             :Policy ;
+        rdfs:range              :Preference ;
+        rdfs:subPropertyOf      owl:topObjectProperty ;
+        owl:propertyChainAxiom  ( :hasPart :hasPreference ) .
+
+:Universal_Description
+        rdf:type  :DescriptiveContext , owl:NamedIndividual .
+
+:PlayCategory  rdf:type  owl:Class ;
+        rdfs:subClassOf  :ApplicationCategory .
+
+:Application  rdf:type    owl:Class ;
+        rdfs:subClassOf   :TargetContext ;
+        rdfs:subClassOf   [ rdf:type        owl:Restriction ;
+                            owl:hasSelf     true ;
+                            owl:onProperty  :hasPartDirectly
+                          ] ;
+        rdfs:subClassOf   [ rdf:type            owl:Restriction ;
+                            owl:onProperty      :partOf ;
+                            owl:someValuesFrom  [ rdf:type   owl:Class ;
+                                                  owl:oneOf  ( :Universal_Target )
+                                                ]
+                          ] ;
+        owl:disjointWith  :ApplicationCategory .
+
+:UniversalObjectPreference
+        rdf:type             owl:Class ;
+        rdfs:subClassOf      :Preference ;
+        owl:equivalentClass  [ rdf:type            owl:Restriction ;
+                               owl:onProperty      :onPreferenceObject ;
+                               owl:someValuesFrom  [ rdf:type   owl:Class ;
+                                                     owl:oneOf  ( :Universal_Object )
+                                                   ]
+                             ] .
+
+:Act_Prompt_Group  rdf:type  owl:NamedIndividual .
+
+:PreferenceObject  rdf:type  owl:Class ;
+        rdfs:subClassOf  :ConditionalContext ;
+        rdfs:subClassOf  [ rdf:type           owl:Restriction ;
+                           owl:allValuesFrom  :Permission ;
+                           owl:onProperty     :hasPart
+                         ] .
+
+:Act_Prompt_Permission
+        rdf:type  owl:NamedIndividual .
+
+:Universal_Target  rdf:type  owl:NamedIndividual , :TargetContext .
+
+:Prot_Signature  rdf:type  owl:NamedIndividual , :ProtectionLevel .
+
+:Policy  rdf:type        owl:Class ;
+        rdfs:subClassOf  owl:Thing ;
+        rdfs:subClassOf  [ rdf:type            owl:Restriction ;
+                           owl:onProperty      :hasPart ;
+                           owl:someValuesFrom  [ rdf:type   owl:Class ;
+                                                 owl:oneOf  ( :Pol_Android )
+                                               ]
+                         ] .
+
+:Android_1  rdf:type           :Preference , owl:NamedIndividual ;
+        :onDescriptiveContext  :Universal_Description ;
+        :onPreferenceAction    :Act_Prompt_Group ;
+        :onPreferenceObject    :Dangerous_Permissions ;
+        :onTargetContext       :Universal_Target ;
+        :priority              0 .
+
+:Time   rdf:type          owl:Class ;
+        rdfs:subClassOf   :DescriptiveContext ;
+        owl:disjointWith  [ rdf:type     owl:Class ;
+                            owl:unionOf  ( :Location :SocialEnvironment )
+                          ] .
+
+:TargetContext  rdf:type  owl:Class ;
+        rdfs:subClassOf   :ConditionalContext ;
+        rdfs:subClassOf   [ rdf:type           owl:Restriction ;
+                            owl:allValuesFrom  :Application ;
+                            owl:onProperty     :hasPart
+                          ] ;
+        owl:disjointWith  [ rdf:type     owl:Class ;
+                            owl:unionOf  ( :DescriptiveContext :PreferenceObject )
+                          ] .
+
+:Act_Not_Share  rdf:type  owl:NamedIndividual .
+
+:ProtectionLevel  rdf:type  owl:Class ;
+        rdfs:subClassOf  owl:Thing .
+
+:Prot_Dangerous  rdf:type  owl:NamedIndividual , :ProtectionLevel .
+
+:Dangerous_Permissions
+        rdf:type  owl:NamedIndividual , :PreferenceObject .
+
+:Act_Share  rdf:type  owl:NamedIndividual .
+
+:Background_Permissions
+        rdf:type  owl:NamedIndividual , :PreferenceObject .
+
+:Prot_Normal  rdf:type  owl:NamedIndividual , :ProtectionLevel .
+
+[ rdf:type             owl:AllDifferent ;
+  owl:distinctMembers  ( :Act_Prompt_Group :Act_Prompt_Permission )
+] .
+
+:Universal_Object  rdf:type  owl:NamedIndividual , :PreferenceObject .
+
+:GroupTargetPreference
+        rdf:type             owl:Class ;
+        rdfs:subClassOf      :Preference ;
+        owl:equivalentClass  [ rdf:type            owl:Restriction ;
+                               owl:onProperty      :onTargetContext ;
+                               owl:someValuesFrom  :ApplicationCategory
+                             ] .
+
+:hasPart  rdf:type          owl:TransitiveProperty , owl:ObjectProperty ;
+        rdfs:domain         owl:Thing ;
+        rdfs:range          owl:Thing ;
+        rdfs:subPropertyOf  owl:topObjectProperty ;
+        owl:inverseOf       :partOf .
+
+:ApplicationCategory  rdf:type  owl:Class ;
+        rdfs:subClassOf  :TargetContext .
+
+:Pol_Android  rdf:type  owl:NamedIndividual , :Policy ;
+        :hasPreference  :Android_1 , :Android_2 .
+
+:Normal_Permissions  rdf:type  owl:NamedIndividual , :PreferenceObject .
+
+:hasAuthor  rdf:type        owl:ObjectProperty ;
+        rdfs:domain         :Application ;
+        rdfs:range          :ApplicationAuthor ;
+        rdfs:subPropertyOf  owl:topObjectProperty .
+
+:onTargetContext  rdf:type  owl:ObjectProperty ;
+        rdfs:domain         :Preference ;
+        rdfs:range          :TargetContext ;
+        rdfs:subPropertyOf  owl:topObjectProperty .
+
+:onPreferenceObject  rdf:type  owl:ObjectProperty ;
+        rdfs:domain         :Preference ;
+        rdfs:range          :PreferenceObject ;
+        rdfs:subPropertyOf  owl:topObjectProperty .
+
+[ rdf:type             owl:AllDifferent ;
+  owl:distinctMembers  ( :Act_Prompt_Permission :Act_Share )
+] .
+
+[ rdf:type             owl:AllDifferent ;
+  owl:distinctMembers  ( :Prot_Dangerous :Prot_Normal )
+] .
+
+[ rdf:type             owl:AllDifferent ;
+  owl:distinctMembers  ( :Act_Not_Share :Act_Prompt_Group )
+] .
+
+:Android_2  rdf:type           :Preference , owl:NamedIndividual ;
+        :onDescriptiveContext  :Universal_Description ;
+        :onPreferenceAction    :Act_Share ;
+        :onPreferenceObject    :Normal_Permissions ;
+        :onTargetContext       :Universal_Target ;
+        :priority              0 .
+
+:BackgroundPermission
+        rdf:type         owl:Class ;
+        rdfs:subClassOf  :Permission .
+
+:NormalPermission  rdf:type  owl:Class ;
+        rdfs:subClassOf  :Permission ;
+        rdfs:subClassOf  [ rdf:type     owl:Class ;
+                           owl:unionOf  ( [ rdf:type            owl:Restriction ;
+                                            owl:onProperty      :hasProtectionLevel ;
+                                            owl:someValuesFrom  [ rdf:type   owl:Class ;
+                                                                  owl:oneOf  ( :Prot_Normal )
+                                                                ]
+                                          ]
+                                          [ rdf:type            owl:Restriction ;
+                                            owl:onProperty      :hasProtectionLevel ;
+                                            owl:someValuesFrom  [ rdf:type   owl:Class ;
+                                                                  owl:oneOf  ( :Prot_Signature )
+                                                                ]
+                                          ]
+                                        )
+                         ] ;
+        rdfs:subClassOf  [ rdf:type            owl:Restriction ;
+                           owl:onProperty      :partOf ;
+                           owl:someValuesFrom  [ rdf:type   owl:Class ;
+                                                 owl:oneOf  ( :Normal_Permissions )
+                                               ]
+                         ] .
+
+:onPreferenceAction  rdf:type  owl:ObjectProperty ;
+        rdfs:domain         :Preference ;
+        rdfs:range          :PreferenceAction ;
+        rdfs:subPropertyOf  owl:topObjectProperty .
+
+:Permission  rdf:type        owl:Class ;
+        rdfs:subClassOf      :PreferenceObject ;
+        rdfs:subClassOf      [ rdf:type        owl:Restriction ;
+                               owl:hasSelf     true ;
+                               owl:onProperty  :hasPartDirectly
+                             ] ;
+        rdfs:subClassOf      [ rdf:type                     owl:Restriction ;
+                               owl:maxQualifiedCardinality  "1"^^xsd:nonNegativeInteger ;
+                               owl:onClass                  [ rdf:type   owl:Class ;
+                                                              owl:oneOf  ( :Prot_Dangerous :Prot_Normal :Prot_Signature )
+                                                            ] ;
+                               owl:onProperty               :hasProtectionLevel
+                             ] ;
+        rdfs:subClassOf      [ rdf:type            owl:Restriction ;
+                               owl:onProperty      :partOf ;
+                               owl:someValuesFrom  [ rdf:type   owl:Class ;
+                                                     owl:oneOf  ( :Universal_Object )
+                                                   ]
+                             ] ;
+        owl:disjointWith     :PermissionGroup ;
+        owl:equivalentClass  [ rdf:type     owl:Class ;
+                               owl:unionOf  ( :DangerousPermission :NormalPermission )
+                             ] .
+
+:SocialEnvironment  rdf:type  owl:Class ;
+        rdfs:subClassOf  :DescriptiveContext .
+
+[ rdf:type             owl:AllDifferent ;
+  owl:distinctMembers  ( :Act_Not_Share :Act_Share )
+] .
+
+:CustomCategory  rdf:type  owl:Class ;
+        rdfs:subClassOf  :ApplicationCategory .
+
+:Location  rdf:type       owl:Class ;
+        rdfs:subClassOf   :DescriptiveContext ;
+        owl:disjointWith  :SocialEnvironment .
+
+:priority  rdf:type  owl:DatatypeProperty ;
+        rdfs:domain  :Preference ;
+        rdfs:range   xsd:nonNegativeInteger .
+
+:hasPartDirectly  rdf:type  owl:ObjectProperty ;
+        rdfs:domain         owl:Thing ;
+        rdfs:range          owl:Thing ;
+        rdfs:subPropertyOf  :hasPart .
+
+:partOf  rdf:type           owl:TransitiveProperty , owl:ObjectProperty ;
+        rdfs:domain         owl:Thing ;
+        rdfs:range          owl:Thing ;
+        rdfs:subPropertyOf  owl:topObjectProperty .
