@@ -102,19 +102,19 @@ perm:Group_Location  rdf:type  :ConditionalContext , owl:NamedIndividual , :Pref
 
 :DescriptiveContext  rdf:type  owl:Class ;
         rdfs:subClassOf   :ConditionalContext ;
-        rdfs:subClassOf   [ rdf:type            owl:Restriction ;
-                            owl:onProperty      :partOf ;
-                            owl:someValuesFrom  [ rdf:type   owl:Class ;
-                                                  owl:oneOf  ( :Universal_Description )
-                                                ]
+        rdfs:subClassOf   [ rdf:type        owl:Restriction ;
+                            owl:hasSelf     true ;
+                            owl:onProperty  :hasPartDirectly
                           ] ;
         rdfs:subClassOf   [ rdf:type           owl:Restriction ;
                             owl:allValuesFrom  :DescriptiveContext ;
                             owl:onProperty     :hasPart
                           ] ;
-        rdfs:subClassOf   [ rdf:type        owl:Restriction ;
-                            owl:hasSelf     true ;
-                            owl:onProperty  :hasPartDirectly
+        rdfs:subClassOf   [ rdf:type            owl:Restriction ;
+                            owl:onProperty      :partOf ;
+                            owl:someValuesFrom  [ rdf:type   owl:Class ;
+                                                  owl:oneOf  ( :Universal_Description )
+                                                ]
                           ] ;
         owl:disjointWith  :PreferenceObject , :Permission , :PermissionGroup , :PlayCategory , :TargetContext , :NormalPermission .
 
@@ -167,14 +167,6 @@ perm:Group_Location  rdf:type  :ConditionalContext , owl:NamedIndividual , :Pref
                                          )
                           ] ;
         owl:disjointWith  :PermissionGroup , :PlayCategory , :TargetContext , :Time , :SocialEnvironment .
-
-[ rdf:type             owl:AllDifferent ;
-  owl:distinctMembers  ( :Act_Not_Share :Act_Share )
-] .
-
-:Act_Not_Share  rdf:type  owl:NamedIndividual , :PreferenceAction .
-
-:Act_Share  rdf:type  owl:NamedIndividual , :PreferenceAction .
 
 perm:Write_Call_Log  rdf:type  :ConditionalContext , :DangerousPermission , owl:NamedIndividual , :PreferenceObject , :Permission ;
         :hasPart             perm:Write_Call_Log ;
@@ -248,19 +240,24 @@ device:Child_1  rdf:type       owl:NamedIndividual , :Preference , :UniversalObj
                            owl:qualifiedCardinality  1
                          ] ;
         rdfs:subClassOf  [ rdf:type                  owl:Restriction ;
+                           owl:onClass               :PreferenceAction ;
+                           owl:onProperty            :onPreferenceAction ;
+                           owl:qualifiedCardinality  1
+                         ] ;
+        rdfs:subClassOf  [ rdf:type                     owl:Restriction ;
+                           owl:minQualifiedCardinality  1 ;
+                           owl:onClass                  :DescriptiveContext ;
+                           owl:onProperty               :onDescriptiveContext
+                         ] ;
+        rdfs:subClassOf  [ rdf:type                  owl:Restriction ;
                            owl:onClass               :PreferenceObject ;
                            owl:onProperty            :onPreferenceObject ;
                            owl:qualifiedCardinality  1
                          ] ;
-        rdfs:subClassOf  [ rdf:type                  owl:Restriction ;
-                           owl:onDataRange           xsd:nonNegativeInteger ;
-                           owl:onProperty            :priority ;
-                           owl:qualifiedCardinality  1
-                         ] ;
-        rdfs:subClassOf  [ rdf:type                  owl:Restriction ;
-                           owl:onClass               :PreferenceAction ;
-                           owl:onProperty            :onPreferenceAction ;
-                           owl:qualifiedCardinality  1
+        rdfs:subClassOf  [ rdf:type                     owl:Restriction ;
+                           owl:maxQualifiedCardinality  1 ;
+                           owl:onDataRange              xsd:nonNegativeInteger ;
+                           owl:onProperty               :priority
                          ] .
 
 :UniversalObjectPreference
@@ -291,6 +288,8 @@ device:Child_1  rdf:type       owl:NamedIndividual , :Preference , :UniversalObj
         rdfs:domain         :Preference ;
         rdfs:range          :PreferenceAction ;
         rdfs:subPropertyOf  owl:topObjectProperty .
+
+:Act_Share  rdf:type  owl:NamedIndividual , :PreferenceAction .
 
 :onPreferenceObject  rdf:type  owl:ObjectProperty ;
         rdfs:domain         :Preference ;
@@ -389,12 +388,6 @@ perm:Read_Calendar  rdf:type  :ConditionalContext , :DangerousPermission , owl:N
 perm:Group_Calendar  rdf:type  :ConditionalContext , owl:NamedIndividual , :PreferenceObject , :PermissionGroup ;
         :hasPart  perm:Read_Calendar , perm:Write_Calendar .
 
-[ rdf:type             owl:AllDifferent ;
-  owl:distinctMembers  ( :Prot_Dangerous :Prot_Signature )
-] .
-
-:Prot_Signature  rdf:type  owl:NamedIndividual , :ProtectionLevel .
-
 device:Henry_1  rdf:type       owl:NamedIndividual , :Preference , :UniversalObjectPreference , :GroupTargetPreference ;
         :onDescriptiveContext  :Universal_Description ;
         :onPreferenceAction    :Act_Share ;
@@ -415,6 +408,8 @@ owl:topObjectProperty
         owl:equivalentClass  [ rdf:type   owl:Class ;
                                owl:oneOf  ( :Act_Not_Share :Act_Prompt_Group :Act_Prompt_Permission :Act_Share )
                              ] .
+
+:Act_Not_Share  rdf:type  owl:NamedIndividual , :PreferenceAction .
 
 :Act_Prompt_Group  rdf:type  owl:NamedIndividual , :PreferenceAction .
 
@@ -490,15 +485,15 @@ perm:Write_External_Storage
 
 :Application  rdf:type    owl:Class ;
         rdfs:subClassOf   :TargetContext ;
+        rdfs:subClassOf   [ rdf:type        owl:Restriction ;
+                            owl:hasSelf     true ;
+                            owl:onProperty  :hasPartDirectly
+                          ] ;
         rdfs:subClassOf   [ rdf:type            owl:Restriction ;
                             owl:onProperty      :partOf ;
                             owl:someValuesFrom  [ rdf:type   owl:Class ;
                                                   owl:oneOf  ( :Universal_Target )
                                                 ]
-                          ] ;
-        rdfs:subClassOf   [ rdf:type        owl:Restriction ;
-                            owl:hasSelf     true ;
-                            owl:onProperty  :hasPartDirectly
                           ] ;
         owl:disjointWith  :DangerousPermission , :PreferenceObject , :Permission , :DescriptiveContext , :PermissionGroup , :PlayCategory , :NormalPermission , :ApplicationCategory , :CustomCategory , :Time , :SocialEnvironment , :Location , :BackgroundPermission .
 
@@ -507,6 +502,20 @@ perm:Write_Calendar  rdf:type  :ConditionalContext , :DangerousPermission , owl:
         :hasPartDirectly     perm:Write_Calendar ;
         :hasProtectionLevel  :Prot_Dangerous ;
         :partOf              :Dangerous_Permissions , :Universal_Object , perm:Group_Calendar , perm:Write_Calendar .
+
+[ rdf:type             owl:AllDifferent ;
+  owl:distinctMembers  ( :Prot_Dangerous :Prot_Signature )
+] .
+
+:Prot_Signature  rdf:type  owl:NamedIndividual , :ProtectionLevel .
+
+[ rdf:type             owl:AllDifferent ;
+  owl:distinctMembers  ( :Prot_Normal :Prot_Signature )
+] .
+
+[ rdf:type             owl:AllDifferent ;
+  owl:distinctMembers  ( :Act_Prompt_Group :Act_Prompt_Permission )
+] .
 
 :ProtectionLevel  rdf:type  owl:Class ;
         rdfs:subClassOf  owl:Thing .
@@ -526,9 +535,6 @@ device:App_Authenticator
         :hasPart          device:App_Authenticator ;
         :hasPartDirectly  device:App_Authenticator ;
         :partOf           :Universal_Target , device:CC_Microsoft_Apps , device:PC_Business , device:App_Authenticator , device:CC_Work_Apps .
-
-<http://www.semanticweb.org/ontologies/2022/1/apso>
-        rdf:type  owl:Ontology .
 
 perm:Group_Contacts  rdf:type  :ConditionalContext , owl:NamedIndividual , :PreferenceObject , :PermissionGroup ;
         :hasPart  perm:Read_Contacts , perm:Write_Contacts .
@@ -552,7 +558,7 @@ perm:Accept_Handover  rdf:type  :ConditionalContext , :DangerousPermission , owl
         :partOf              :Dangerous_Permissions , :Universal_Object , perm:Group_Phone , perm:Accept_Handover .
 
 [ rdf:type             owl:AllDifferent ;
-  owl:distinctMembers  ( :Prot_Dangerous :Prot_Normal )
+  owl:distinctMembers  ( :Act_Not_Share :Act_Prompt_Group )
 ] .
 
 perm:Manage_Media  rdf:type  :ConditionalContext , owl:NamedIndividual , :PreferenceObject , :Permission , :NormalPermission ;
@@ -620,7 +626,7 @@ perm:Access_Media_Location
         :partOf              :Dangerous_Permissions , :Universal_Object , perm:Group_Storage , perm:Access_Media_Location .
 
 [ rdf:type             owl:AllDifferent ;
-  owl:distinctMembers  ( :Act_Not_Share :Act_Prompt_Permission )
+  owl:distinctMembers  ( :Prot_Dangerous :Prot_Normal )
 ] .
 
 perm:Camera  rdf:type        :ConditionalContext , :DangerousPermission , owl:NamedIndividual , :PreferenceObject , :Permission ;
@@ -631,6 +637,9 @@ perm:Camera  rdf:type        :ConditionalContext , :DangerousPermission , owl:Na
 
 perm:Group_Camera  rdf:type  :ConditionalContext , owl:NamedIndividual , :PreferenceObject , :PermissionGroup ;
         :hasPart  perm:Camera .
+
+<http://www.semanticweb.org/ontologies/2022/apso>
+        rdf:type  owl:Ontology .
 
 device:Author_Zoom_us
         rdf:type  owl:NamedIndividual , :ApplicationAuthor .
@@ -663,14 +672,6 @@ perm:Add_Voicemail  rdf:type  :ConditionalContext , :DangerousPermission , owl:N
         :hasProtectionLevel  :Prot_Dangerous ;
         :partOf              :Dangerous_Permissions , :Universal_Object , perm:Group_Phone , perm:Add_Voicemail .
 
-[ rdf:type             owl:AllDifferent ;
-  owl:distinctMembers  ( :Act_Prompt_Permission :Act_Share )
-] .
-
-[ rdf:type             owl:AllDifferent ;
-  owl:distinctMembers  ( :Act_Prompt_Group :Act_Share )
-] .
-
 perm:Activity_Recognition
         rdf:type             :ConditionalContext , :DangerousPermission , owl:NamedIndividual , :PreferenceObject , :Permission ;
         :hasPart             perm:Activity_Recognition ;
@@ -681,6 +682,10 @@ perm:Activity_Recognition
 perm:Group_Activity_Recognition
         rdf:type  :ConditionalContext , owl:NamedIndividual , :PreferenceObject , :PermissionGroup ;
         :hasPart  perm:Activity_Recognition .
+
+[ rdf:type             owl:AllDifferent ;
+  owl:distinctMembers  ( :Act_Not_Share :Act_Prompt_Permission )
+] .
 
 perm:Manage_External_Storage
         rdf:type             :ConditionalContext , owl:NamedIndividual , :PreferenceObject , :Permission , :NormalPermission ;
@@ -771,12 +776,12 @@ perm:High_Sampling_Rate_Sensors
         :hasProtectionLevel  :Prot_Normal ;
         :partOf              :Universal_Object , :Normal_Permissions , perm:Group_Sensors , perm:High_Sampling_Rate_Sensors .
 
+[ rdf:type             owl:AllDifferent ;
+  owl:distinctMembers  ( :Act_Prompt_Permission :Act_Share )
+] .
+
 device:Author_Microsoft_Cooperation
         rdf:type  owl:NamedIndividual , :ApplicationAuthor .
-
-[ rdf:type             owl:AllDifferent ;
-  owl:distinctMembers  ( :Prot_Normal :Prot_Signature )
-] .
 
 device:PC_Medical  rdf:type  :ConditionalContext , owl:NamedIndividual , :PlayCategory , :TargetContext , :ApplicationCategory ;
         :hasPart  device:App_Hjelp113 .
@@ -790,7 +795,11 @@ device:Pol_Henry  rdf:type  owl:NamedIndividual , :Policy ;
         :hasPreference  device:Henry_3 , device:Henry_1 , :Android_1 , :Android_2 , device:Henry_2 .
 
 [ rdf:type             owl:AllDifferent ;
-  owl:distinctMembers  ( :Act_Not_Share :Act_Prompt_Group )
+  owl:distinctMembers  ( :Act_Not_Share :Act_Share )
+] .
+
+[ rdf:type             owl:AllDifferent ;
+  owl:distinctMembers  ( :Act_Prompt_Group :Act_Share )
 ] .
 
 device:Author_Stiftelsen_Norsk_Luftambulanse
@@ -802,7 +811,3 @@ device:Henry_2  rdf:type       owl:NamedIndividual , :Preference , :UniversalTar
         :onPreferenceObject    perm:Access_Background_Location ;
         :onTargetContext       :Universal_Target ;
         :priority              2 .
-
-[ rdf:type             owl:AllDifferent ;
-  owl:distinctMembers  ( :Act_Prompt_Group :Act_Prompt_Permission )
-] .
